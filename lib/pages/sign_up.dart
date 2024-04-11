@@ -142,11 +142,6 @@ class _FormContentState extends State<_FormContent> {
                 return null;
               },
               decoration: const InputDecoration(
-                // kode buat mengatur warna border input
-                // enabledBorder: OutlineInputBorder(
-                //   borderSide:
-                //       BorderSide(color: Color.fromARGB(255, 237, 86, 30)),
-                // ),
                 focusedBorder: OutlineInputBorder(
                   borderSide:
                       BorderSide(color: Color.fromARGB(158, 177, 63, 22)),
@@ -355,7 +350,7 @@ class _FormContentState extends State<_FormContent> {
               children: [
                 TextButton(
                   onPressed: () {
-                    // Action when "Forgot Password?" is pressed
+                    // Action
                   },
                   child: Text(
                     'Forgot Password?',

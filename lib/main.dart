@@ -1,4 +1,5 @@
 import 'package:activewell_new/pages/account.dart';
+import 'package:activewell_new/pages/favorite.dart';
 import 'package:activewell_new/pages/journey.dart';
 import 'package:activewell_new/pages/program.dart';
 import 'package:activewell_new/pages/recipe.dart';
@@ -37,8 +38,9 @@ class MyApp extends StatelessWidget {
         '/videos': (context) => VideosPage(),
         '/recipes': (context) => RecipesPage(),
         '/tools': (context) => ToolsPage(),
+        '/favorites': (context) => FavoritePage(),
       },
-      initialRoute: "/tools",
+      initialRoute: "/homescreen",
     );
   }
 }

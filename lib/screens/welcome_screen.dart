@@ -1,4 +1,3 @@
-import 'package:activewell_new/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 
 class WelcomeScreen extends StatelessWidget {

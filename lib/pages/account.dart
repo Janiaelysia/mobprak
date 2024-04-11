@@ -15,6 +15,7 @@ class AccountPage extends StatelessWidget {
         title: Text(
           'Account',
           style: TextStyle(
+            color: Colors.white,
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -42,7 +43,7 @@ class AccountPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
-                    child: Text("Nama Pengguna",
+                    child: Text("Putri",
                         style: TextStyle(
                             fontSize: 20,
                             color: Colors.black,
@@ -50,7 +51,7 @@ class AccountPage extends StatelessWidget {
                   ),
                   Container(
                     child: Text(
-                      "@username",
+                      "Syafira",
                       style: TextStyle(
                           fontSize: 20,
                           color: Colors.black.withOpacity(0.7),
@@ -76,6 +77,10 @@ class AccountPage extends StatelessWidget {
                 tileColor: Colors.white,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(12))),
+                leading: Icon(
+                  Icons.settings,
+                  color: Colors.grey,
+                ),
                 title: Text("Settings"),
               ),
 
@@ -91,6 +96,10 @@ class AccountPage extends StatelessWidget {
                 tileColor: Colors.white,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(12))),
+                leading: Icon(
+                  Icons.info,
+                  color: Colors.grey,
+                ),
                 title: Text("About Us"),
               ),
 
@@ -106,36 +115,40 @@ class AccountPage extends StatelessWidget {
                 tileColor: Colors.white,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(12))),
+                leading: Icon(
+                  Icons.login,
+                  color: Colors.grey,
+                ),
                 title: Text("Sign in"),
               ),
 
-              SizedBox(height: 10), // Adding space between items
+              // SizedBox(height: 10), // Adding space between items
 
-              ListTile(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => SignUpPage()),
-                  );
-                },
-                tileColor: Colors.white,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(12))),
-                title: Text("Sign up"),
-              ),
+              // ListTile(
+              //   onTap: () {
+              //     Navigator.push(
+              //       context,
+              //       MaterialPageRoute(builder: (context) => SignUpPage()),
+              //     );
+              //   },
+              //   tileColor: Colors.white,
+              //   shape: RoundedRectangleBorder(
+              //       borderRadius: BorderRadius.all(Radius.circular(12))),
+              //   title: Text("Sign up"),
+              // ),
 
-              ListTile(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => SignInPage()),
-                  );
-                },
-                tileColor: Colors.white,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(12))),
-                title: Text("Sign out"),
-              ),
+              // ListTile(
+              //   onTap: () {
+              //     Navigator.push(
+              //       context,
+              //       MaterialPageRoute(builder: (context) => SignInPage()),
+              //     );
+              //   },
+              //   tileColor: Colors.white,
+              //   shape: RoundedRectangleBorder(
+              //       borderRadius: BorderRadius.all(Radius.circular(12))),
+              //   title: Text("Sign out"),
+              // ),
             ],
           ),
         )

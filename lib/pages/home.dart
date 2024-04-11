@@ -98,7 +98,7 @@ class HomePage extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.only(left: 3, bottom: 15),
                 child: Text(
-                  "Hi, User",
+                  "Hi, Putri",
                   style: TextStyle(
                     fontSize: 25,
                     fontWeight: FontWeight.w600,
@@ -175,12 +175,21 @@ class HomePage extends StatelessWidget {
                       fontWeight: FontWeight.w600,
                     ),
                   ),
-                  Text(
-                    "See All",
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w500,
-                      color: Color.fromARGB(255, 237, 86, 59),
+                  GestureDetector(
+                    onTap: () {
+                      // Navigasi ke VideosPage()
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => VideosPage()),
+                      );
+                    },
+                    child: Text(
+                      "See All",
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w500,
+                        color: Color.fromARGB(255, 237, 86, 59),
+                      ),
                     ),
                   )
                 ],
@@ -255,12 +264,21 @@ class HomePage extends StatelessWidget {
                       fontWeight: FontWeight.w600,
                     ),
                   ),
-                  Text(
-                    "See All",
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w500,
-                      color: Color.fromARGB(255, 237, 86, 59),
+                  GestureDetector(
+                    onTap: () {
+                      // Navigasi ke RecipesPage()
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => RecipesPage()),
+                      );
+                    },
+                    child: Text(
+                      "See All",
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w500,
+                        color: Color.fromARGB(255, 237, 86, 59),
+                      ),
                     ),
                   )
                 ],
