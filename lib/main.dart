@@ -8,6 +8,7 @@ import 'package:activewell_new/pages/sign_up.dart';
 import 'package:activewell_new/pages/tools.dart';
 import 'package:activewell_new/pages/videos.dart';
 import 'package:activewell_new/screens/home_screen.dart';
+import 'package:activewell_new/screens/splash_screen.dart';
 import 'package:activewell_new/screens/welcome_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -28,7 +29,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(scaffoldBackgroundColor: Colors.white),
       routes: {
-        "/welcome": (context) => WelcomeScreen(),
+        "/welcome": (context) =>
+            WelcomeScreen(), //setelah splash (kalau belum pernah login dan ga centang remember me)
         "/homescreen": (context) => HomeScreen(),
         "/signin": (context) => SignInPage(),
         "/signup": (context) => SignUpPage(),
@@ -39,8 +41,9 @@ class MyApp extends StatelessWidget {
         '/recipes': (context) => RecipesPage(),
         '/tools': (context) => ToolsPage(),
         '/favorites': (context) => FavoritePage(),
+        '/splash': (context) => SplashScreen(),
       },
-      initialRoute: "/homescreen",
+      initialRoute: "/welcome",
     );
   }
 }

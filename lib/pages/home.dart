@@ -2,6 +2,8 @@ import 'package:activewell_new/pages/journey.dart';
 import 'package:activewell_new/pages/program.dart';
 import 'package:activewell_new/pages/recipe.dart';
 import 'package:activewell_new/pages/videos.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
@@ -65,287 +67,301 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      children: [
-        Container(
-          padding: EdgeInsets.only(top: 15, left: 15, right: 15, bottom: 10),
-          decoration: BoxDecoration(
-            color: Color.fromARGB(255, 237, 86, 59),
-            borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(20),
-              bottomRight: Radius.circular(20),
-            ),
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+    return FutureBuilder(
+      future: FirebaseFirestore.instance
+          .collection('users')
+          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .get(),
+      builder: ((context, snapshot) {
+        if (snapshot.hasData) {
+          return ListView(
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Icon(
-                    Icons.dashboard,
-                    size: 30,
-                    color: Colors.white,
-                  ),
-                  Icon(
-                    Icons.notifications,
-                    size: 30,
-                    color: Colors.white,
-                  ),
-                ],
-              ),
-              SizedBox(height: 20),
-              Padding(
-                padding: EdgeInsets.only(left: 3, bottom: 15),
-                child: Text(
-                  "Hi, Putri",
-                  style: TextStyle(
-                    fontSize: 25,
-                    fontWeight: FontWeight.w600,
-                    letterSpacing: 1,
-                    wordSpacing: 2,
-                    color: Colors.white,
+              Container(
+                padding:
+                    EdgeInsets.only(top: 15, left: 15, right: 15, bottom: 10),
+                decoration: BoxDecoration(
+                  color: Color.fromARGB(255, 237, 86, 59),
+                  borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(20),
+                    bottomRight: Radius.circular(20),
                   ),
                 ),
-              ),
-            ],
-          ),
-        ),
-        Padding(
-          padding: EdgeInsets.only(top: 20, left: 15, right: 15),
-          child: Column(
-            children: [
-              GridView.builder(
-                itemCount: catNames.length,
-                shrinkWrap: true,
-                physics: NeverScrollableScrollPhysics(),
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 4,
-                  childAspectRatio: 1.1,
-                ),
-
-                //logo di menu
-                itemBuilder: (context, index) {
-                  return GestureDetector(
-                    onTap: () {
-                      print(catNames[index]);
-                      Navigator.pushNamed(context, catPages[index]);
-                    },
-                    child: Column(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Container(
-                          height: 45,
-                          width: 50,
-                          decoration: BoxDecoration(
-                            image: DecorationImage(
-                              image: AssetImage(
-                                "images/${imgList[index]}.jpeg",
-                              ),
-                              fit: BoxFit.cover,
-                            ),
-                          ),
+                        Icon(
+                          Icons.dashboard,
+                          size: 30,
+                          color: Colors.white,
                         ),
-                        SizedBox(height: 10),
-                        Container(
-                          margin: EdgeInsets.only(bottom: 15),
-                          child: Text(
-                            catNames[index],
-                            style: TextStyle(
-                              fontSize: 10,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.black.withOpacity(0.7),
-                            ),
-                          ),
+                        Icon(
+                          Icons.notifications,
+                          size: 30,
+                          color: Colors.white,
                         ),
                       ],
                     ),
-                  );
-                },
-              ),
-              SizedBox(height: 20),
-
-              //grid videos
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "Videos",
-                    style: TextStyle(
-                      fontSize: 23,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      // Navigasi ke VideosPage()
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => VideosPage()),
-                      );
-                    },
-                    child: Text(
-                      "See All",
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w500,
-                        color: Color.fromARGB(255, 237, 86, 59),
-                      ),
-                    ),
-                  )
-                ],
-              ),
-              SizedBox(height: 10),
-
-              //isi videos
-              Container(
-                height: 290,
-                width: 500, // Adjustable
-                child: ListView.builder(
-                  itemCount: imgList.length,
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (context, index) {
-                    return InkWell(
-                      onTap: () {},
-                      child: Container(
-                        margin: EdgeInsets.only(right: 10),
-                        padding: EdgeInsets.only(
-                          right: 10,
-                          left: 10,
-                        ),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          color: Color(0xFFF5F3FF),
-                        ),
-                        child: Column(
-                          // crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Container(
-                              margin: EdgeInsets.only(
-                                top: 20,
-                                left: 10,
-                                right: 10,
-                                bottom: 20,
-                              ),
-                              child: Image.network(
-                                "${thumbList[index]}",
-                                width: 300,
-                                height: 200,
-                                fit: BoxFit.fill,
-                              ),
-                            ),
-                            Container(
-                              margin: EdgeInsets.only(bottom: 5),
-                              child: Text(
-                                thumbTitle[index],
-                                style: TextStyle(
-                                  fontSize: 22,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.black.withOpacity(0.6),
-                                ),
-                              ),
-                            ),
-                          ],
+                    SizedBox(height: 20),
+                    Padding(
+                      padding: EdgeInsets.only(left: 3, bottom: 15),
+                      child: Text(
+                        "Hi, ${snapshot.data!.data()!['fname']}",
+                        style: TextStyle(
+                          fontSize: 25,
+                          fontWeight: FontWeight.w600,
+                          letterSpacing: 1,
+                          wordSpacing: 2,
+                          color: Colors.white,
                         ),
                       ),
-                    );
-                  },
+                    ),
+                  ],
                 ),
               ),
-              SizedBox(height: 20),
-
-              //grid recipes
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "Recipes",
-                    style: TextStyle(
-                      fontSize: 23,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      // Navigasi ke RecipesPage()
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => RecipesPage()),
-                      );
-                    },
-                    child: Text(
-                      "See All",
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w500,
-                        color: Color.fromARGB(255, 237, 86, 59),
+              Padding(
+                padding: EdgeInsets.only(top: 20, left: 15, right: 15),
+                child: Column(
+                  children: [
+                    GridView.builder(
+                      itemCount: catNames.length,
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 4,
+                        childAspectRatio: 1.1,
                       ),
-                    ),
-                  )
-                ],
-              ),
-              SizedBox(height: 10),
 
-              //isi recipes
-              Container(
-                width: 500,
-                height: 500,
-                child: ListView.builder(
-                  itemCount: imgList.length,
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (context, index) {
-                    return InkWell(
-                      onTap: () {},
-                      child: Container(
-                        margin: EdgeInsets.only(right: 10),
-                        padding: EdgeInsets.only(
-                          right: 10,
-                          left: 10,
-                        ),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          color: Color(0xFFF5F3FF),
-                        ),
-                        child: Column(
-                          // crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Container(
-                              margin: EdgeInsets.only(
-                                top: 20,
-                                left: 10,
-                                right: 10,
-                                bottom: 20,
-                              ),
-                              child: Image.network(
-                                "${recList[index]}",
-                                width: 300,
-                                height: 400,
-                                fit: BoxFit.fill,
-                              ),
-                            ),
-                            Container(
-                              margin: EdgeInsets.only(bottom: 5),
-                              child: Text(
-                                recTitle[index],
-                                style: TextStyle(
-                                  fontSize: 22,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.black.withOpacity(0.6),
+                      //logo di menu
+                      itemBuilder: (context, index) {
+                        return GestureDetector(
+                          onTap: () {
+                            print(catNames[index]);
+                            Navigator.pushNamed(context, catPages[index]);
+                          },
+                          child: Column(
+                            children: [
+                              Container(
+                                height: 45,
+                                width: 50,
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                    image: AssetImage(
+                                      "images/${imgList[index]}.png",
+                                    ),
+                                    fit: BoxFit.cover,
+                                  ),
                                 ),
                               ),
-                            ),
-                          ],
+                              SizedBox(height: 10),
+                              Container(
+                                margin: EdgeInsets.only(bottom: 15),
+                                child: Text(
+                                  catNames[index],
+                                  style: TextStyle(
+                                    fontSize: 10,
+                                    fontWeight: FontWeight.w500,
+                                    color: Colors.black.withOpacity(0.7),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                    ),
+                    SizedBox(height: 20),
+
+                    //grid videos
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "Videos",
+                          style: TextStyle(
+                            fontSize: 23,
+                            fontWeight: FontWeight.w600,
+                          ),
                         ),
+                        GestureDetector(
+                          onTap: () {
+                            // Navigasi ke VideosPage()
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => VideosPage()),
+                            );
+                          },
+                          child: Text(
+                            "See All",
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w500,
+                              color: Color.fromARGB(255, 237, 86, 59),
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                    SizedBox(height: 10),
+
+                    //isi videos
+                    Container(
+                      height: 290,
+                      width: 500, // Adjustable
+                      child: ListView.builder(
+                        itemCount: imgList.length,
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (context, index) {
+                          return InkWell(
+                            onTap: () {},
+                            child: Container(
+                              margin: EdgeInsets.only(right: 10),
+                              padding: EdgeInsets.only(
+                                right: 10,
+                                left: 10,
+                              ),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                color: Color(0xFFF5F3FF),
+                              ),
+                              child: Column(
+                                // crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Container(
+                                    margin: EdgeInsets.only(
+                                      top: 20,
+                                      left: 10,
+                                      right: 10,
+                                      bottom: 20,
+                                    ),
+                                    child: Image.network(
+                                      "${thumbList[index]}",
+                                      width: 300,
+                                      height: 200,
+                                      fit: BoxFit.fill,
+                                    ),
+                                  ),
+                                  Container(
+                                    margin: EdgeInsets.only(bottom: 5),
+                                    child: Text(
+                                      thumbTitle[index],
+                                      style: TextStyle(
+                                        fontSize: 22,
+                                        fontWeight: FontWeight.w600,
+                                        color: Colors.black.withOpacity(0.6),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          );
+                        },
                       ),
-                    );
-                  },
+                    ),
+                    SizedBox(height: 20),
+
+                    //grid recipes
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "Recipes",
+                          style: TextStyle(
+                            fontSize: 23,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            // Navigasi ke RecipesPage()
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => RecipesPage()),
+                            );
+                          },
+                          child: Text(
+                            "See All",
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w500,
+                              color: Color.fromARGB(255, 237, 86, 59),
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                    SizedBox(height: 10),
+
+                    //isi recipes
+                    Container(
+                      width: 500,
+                      height: 500,
+                      child: ListView.builder(
+                        itemCount: imgList.length,
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (context, index) {
+                          return InkWell(
+                            onTap: () {},
+                            child: Container(
+                              margin: EdgeInsets.only(right: 10),
+                              padding: EdgeInsets.only(
+                                right: 10,
+                                left: 10,
+                              ),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                color: Color(0xFFF5F3FF),
+                              ),
+                              child: Column(
+                                // crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Container(
+                                    margin: EdgeInsets.only(
+                                      top: 20,
+                                      left: 10,
+                                      right: 10,
+                                      bottom: 20,
+                                    ),
+                                    child: Image.network(
+                                      "${recList[index]}",
+                                      width: 300,
+                                      height: 400,
+                                      fit: BoxFit.fill,
+                                    ),
+                                  ),
+                                  Container(
+                                    margin: EdgeInsets.only(bottom: 5),
+                                    child: Text(
+                                      recTitle[index],
+                                      style: TextStyle(
+                                        fontSize: 22,
+                                        fontWeight: FontWeight.w600,
+                                        color: Colors.black.withOpacity(0.6),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+
+                    SizedBox(height: 20),
+                  ],
                 ),
               ),
-
-              SizedBox(height: 20),
             ],
-          ),
-        ),
-      ],
+          );
+        }
+        return CircularProgressIndicator();
+      }),
     );
   }
 }

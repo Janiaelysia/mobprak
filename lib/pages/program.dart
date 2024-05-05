@@ -6,7 +6,7 @@ class ProgramPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Text("Ini prgram page"),
+      child: Text("Ini program page"),
     );
   }
 }

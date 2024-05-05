@@ -324,7 +324,10 @@ class _FormContentState extends State<_FormContent> {
                       password: _passwordController.text,
                     )
                         .then((userCredential) {
-                      _db.collection("users").add({
+                      _db
+                          .collection("users")
+                          .doc(userCredential.user!.uid)
+                          .set({
                         "fname": _fnameController.text,
                         "lname": _lnameController.text,
                         "email": _emailController.text,
@@ -338,7 +341,7 @@ class _FormContentState extends State<_FormContent> {
                           );
                         },
                       ).catchError(
-                          (error) => print("Error adding user: $error"));
+                              (error) => print("Error adding user: $error"));
                     }).catchError((error) => print("Error signing up: $error"));
                   }
                 },
