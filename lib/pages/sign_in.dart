@@ -1,5 +1,5 @@
 import 'package:activewell_new/screens/home_screen.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:activewell_new/services/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:activewell_new/pages/sign_up.dart';
 
@@ -62,7 +62,7 @@ class _Logo extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         Image.asset(
-          'images/logo.png',
+          'assets/images/logo.png',
           width: isSmallScreen ? 200 : 300,
           height: isSmallScreen ? 200 : 300,
         ),
@@ -72,10 +72,10 @@ class _Logo extends StatelessWidget {
             "Welcome Back to Active Well!",
             textAlign: TextAlign.center,
             style: isSmallScreen
-                ? Theme.of(context).textTheme.headline5
+                ? Theme.of(context).textTheme.headlineSmall
                 : Theme.of(context)
                     .textTheme
-                    .headline4
+                    .headlineMedium
                     ?.copyWith(color: Colors.black),
           ),
         )
@@ -94,10 +94,26 @@ class _FormContent extends StatefulWidget {
 class __FormContentState extends State<_FormContent> {
   bool _isPasswordVisible = false;
   bool _rememberMe = false;
-  final _emailController = TextEditingController();
-  final _passwordController = TextEditingController();
+  late final TextEditingController _emailController;
+  late final TextEditingController _passwordController;
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  AuthService auth = AuthService();
+
+  @override
+  void initState() {
+    _emailController = TextEditingController();
+    _passwordController = TextEditingController();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -232,11 +248,9 @@ class __FormContentState extends State<_FormContent> {
                 ),
                 onPressed: () {
                   if (_formKey.currentState?.validate() ?? false) {
-                    FirebaseAuth.instance
-                        .signInWithEmailAndPassword(
-                      email: _emailController.text,
-                      password: _passwordController.text,
-                    )
+                    auth
+                        .loginUser(
+                            _emailController.text, _passwordController.text)
                         .then(
                       (value) {
                         Navigator.push(
@@ -254,10 +268,7 @@ class __FormContentState extends State<_FormContent> {
                               actions: [
                                 TextButton(
                                   onPressed: () {
-                                    Navigator.of(context).pop(
-                                      MaterialPageRoute(
-                                          builder: (context) => SignInPage()),
-                                    );
+                                    Navigator.of(context).pop();
                                     _formKey.currentState?.reset();
                                   },
                                   child: Text("OK"),

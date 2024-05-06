@@ -12,6 +12,7 @@ import 'package:activewell_new/screens/splash_screen.dart';
 import 'package:activewell_new/screens/welcome_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'firebase_options.dart';
 
 Future<void> main() async {
@@ -25,25 +26,27 @@ Future<void> main() async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(scaffoldBackgroundColor: Colors.white),
-      routes: {
-        "/welcome": (context) =>
-            WelcomeScreen(), //setelah splash (kalau belum pernah login dan ga centang remember me)
-        "/homescreen": (context) => HomeScreen(),
-        "/signin": (context) => SignInPage(),
-        "/signup": (context) => SignUpPage(),
-        "/account": (context) => AccountPage(),
-        '/journey': (context) => JourneyPage(),
-        '/programs': (context) => ProgramPage(),
-        '/videos': (context) => VideosPage(),
-        '/recipes': (context) => RecipesPage(),
-        '/tools': (context) => ToolsPage(),
-        '/favorites': (context) => FavoritePage(),
-        '/splash': (context) => SplashScreen(),
-      },
-      initialRoute: "/welcome",
+    return ProviderScope(
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(scaffoldBackgroundColor: Colors.white),
+        routes: {
+          "/welcome": (context) =>
+              WelcomeScreen(), //setelah splash (kalau belum pernah login dan ga centang remember me)
+          "/homescreen": (context) => HomeScreen(),
+          "/signin": (context) => SignInPage(),
+          "/signup": (context) => SignUpPage(),
+          "/account": (context) => AccountPage(),
+          '/journey': (context) => JourneyPage(),
+          '/programs': (context) => ProgramPage(),
+          '/videos': (context) => VideosPage(),
+          '/recipes': (context) => RecipesPage(),
+          '/tools': (context) => ToolsPage(),
+          '/favorites': (context) => FavoritePage(),
+          '/splash': (context) => SplashScreen(),
+        },
+        initialRoute: "/welcome",
+      ),
     );
   }
 }

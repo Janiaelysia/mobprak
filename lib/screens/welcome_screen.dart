@@ -1,3 +1,4 @@
+import 'package:activewell_new/screens/auth/auth_screen.dart';
 import 'package:flutter/material.dart';
 
 class WelcomeScreen extends StatelessWidget {
@@ -34,7 +35,7 @@ class WelcomeScreen extends StatelessWidget {
                   alignment: Alignment.center,
                   child: Center(
                     child: Image.asset(
-                      "images/welcome.jpeg",
+                      "assets/images/welcome.jpeg",
                       scale: isSmallScreen ? 1.5 : 1.2,
                     ),
                   ),
@@ -99,7 +100,11 @@ class WelcomeScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(10),
                           child: InkWell(
                             onTap: () {
-                              Navigator.pushNamed(context, "/signin");
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => AuthScreen()),
+                              );
                             },
                             child: Container(
                               padding: EdgeInsets.symmetric(

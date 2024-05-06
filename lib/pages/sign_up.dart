@@ -1,6 +1,5 @@
 import 'package:activewell_new/screens/home_screen.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:activewell_new/services/auth_service.dart';
 import 'package:flutter/material.dart';
 
 class SignUpPage extends StatelessWidget {
@@ -11,42 +10,44 @@ class SignUpPage extends StatelessWidget {
     final bool isSmallScreen = MediaQuery.of(context).size.width < 600;
 
     return Scaffold(
-      body: Stack(
-        children: [
-          Container(
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height / 2.3,
-            decoration: BoxDecoration(
-              color: Color.fromARGB(255, 235, 235, 240),
-              borderRadius: BorderRadius.only(
-                bottomRight: Radius.circular(70),
-                bottomLeft: Radius.circular(70),
+      body: SingleChildScrollView(
+        child: Stack(
+          children: [
+            Container(
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height / 2.3,
+              decoration: BoxDecoration(
+                color: Color.fromARGB(255, 235, 235, 240),
+                borderRadius: BorderRadius.only(
+                  bottomRight: Radius.circular(70),
+                  bottomLeft: Radius.circular(70),
+                ),
               ),
             ),
-          ),
-          Center(
-            child: isSmallScreen
-                ? Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: const [
-                      _Logo(),
-                      _FormContent(),
-                    ],
-                  )
-                : Container(
-                    padding: const EdgeInsets.all(32.0),
-                    constraints: const BoxConstraints(maxWidth: 800),
-                    child: Row(
+            Center(
+              child: isSmallScreen
+                  ? Column(
+                      mainAxisSize: MainAxisSize.min,
                       children: const [
-                        Expanded(child: _Logo()),
-                        Expanded(
-                          child: Center(child: _FormContent()),
-                        ),
+                        _Logo(),
+                        _FormContent(),
                       ],
+                    )
+                  : Container(
+                      padding: const EdgeInsets.all(32.0),
+                      constraints: const BoxConstraints(maxWidth: 800),
+                      child: Row(
+                        children: const [
+                          Expanded(child: _Logo()),
+                          Expanded(
+                            child: Center(child: _FormContent()),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-          ),
-        ],
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -63,7 +64,7 @@ class _Logo extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         Image.asset(
-          'images/logo.png',
+          'assets/images/logo.png',
           width: isSmallScreen ? 200 : 300,
           height: isSmallScreen ? 200 : 300,
         ),
@@ -75,9 +76,9 @@ class _Logo extends StatelessWidget {
             style: isSmallScreen
                 ? Theme.of(context)
                     .textTheme
-                    .headline5
+                    .headlineSmall
                     ?.copyWith(fontWeight: FontWeight.bold)
-                : Theme.of(context).textTheme.headline4?.copyWith(
+                : Theme.of(context).textTheme.headlineMedium?.copyWith(
                       color: Colors.black,
                       fontWeight: FontWeight
                           .normal, // or use FontWeight.w400 for normal weight
@@ -100,18 +101,38 @@ class _FormContentState extends State<_FormContent> {
   bool _isPasswordVisible = false;
   bool _isConfirmPasswordVisible = false;
   bool _agreement = false;
-  final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _confirmPasswordController =
-      TextEditingController();
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _fnameController = TextEditingController();
-  final TextEditingController _lnameController = TextEditingController();
-  final FirebaseFirestore _db = FirebaseFirestore.instance;
+  late final TextEditingController _passwordController;
+  late final TextEditingController _confirmPasswordController;
+  late final TextEditingController _emailController;
+  late final TextEditingController _fnameController;
+  late final TextEditingController _lnameController;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
+  void initState() {
+    _passwordController = TextEditingController();
+    _confirmPasswordController = TextEditingController();
+    _emailController = TextEditingController();
+    _fnameController = TextEditingController();
+    _lnameController = TextEditingController();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _passwordController.dispose();
+    _confirmPasswordController.dispose();
+    _emailController.dispose();
+    _fnameController.dispose();
+    _lnameController.dispose();
+    super.dispose();
+  }
+
+  AuthService auth = AuthService();
+
+  @override
   Widget build(BuildContext context) {
-    var container = Container(
+    return Container(
       padding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
       decoration: BoxDecoration(
         color: Colors.white,
@@ -318,31 +339,32 @@ class _FormContentState extends State<_FormContent> {
                       return;
                     }
 
-                    FirebaseAuth.instance
-                        .createUserWithEmailAndPassword(
-                      email: _emailController.text,
-                      password: _passwordController.text,
+                    auth
+                        .registerUser(
+                      _emailController.text,
+                      _passwordController.text,
+                      _fnameController.text,
+                      _lnameController.text,
                     )
-                        .then((userCredential) {
-                      _db
-                          .collection("users")
-                          .doc(userCredential.user!.uid)
-                          .set({
-                        "fname": _fnameController.text,
-                        "lname": _lnameController.text,
-                        "email": _emailController.text,
-                        "password": _passwordController.text,
-                      }).then(
-                        (value) {
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => HomeScreen()),
-                          );
-                        },
-                      ).catchError(
-                              (error) => print("Error adding user: $error"));
-                    }).catchError((error) => print("Error signing up: $error"));
+                        .then((value) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text('User created successfully!'),
+                        ),
+                      );
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => HomeScreen(),
+                        ),
+                      );
+                    }).catchError((e) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(e.toString()),
+                        ),
+                      );
+                    });
                   }
                 },
               ),
@@ -370,7 +392,6 @@ class _FormContentState extends State<_FormContent> {
         ),
       ),
     );
-    return container;
   }
 
   Widget _gap() => const SizedBox(height: 16);
