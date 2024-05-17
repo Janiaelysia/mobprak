@@ -45,7 +45,7 @@ class MyApp extends StatelessWidget {
           '/favorites': (context) => FavoritePage(),
           '/splash': (context) => SplashScreen(),
         },
-        initialRoute: "/welcome",
+        initialRoute: "/videos",
       ),
     );
   }
