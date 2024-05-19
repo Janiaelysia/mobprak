@@ -1,3 +1,4 @@
+import 'package:activewell_new/common/color_extension.dart';
 import 'package:activewell_new/pages/journey.dart';
 import 'package:activewell_new/pages/program.dart';
 import 'package:activewell_new/pages/recipe.dart';
@@ -125,53 +126,108 @@ class HomePage extends StatelessWidget {
                 padding: EdgeInsets.only(top: 20, left: 15, right: 15),
                 child: Column(
                   children: [
-                    GridView.builder(
-                      itemCount: catNames.length,
-                      shrinkWrap: true,
-                      physics: NeverScrollableScrollPhysics(),
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 4,
-                        childAspectRatio: 1.1,
-                      ),
-
-                      //logo di menu
-                      itemBuilder: (context, index) {
-                        return GestureDetector(
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        InkWell(
                           onTap: () {
-                            print(catNames[index]);
-                            Navigator.pushNamed(context, catPages[index]);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => RecipesPage()),
+                            );
                           },
-                          child: Column(
-                            children: [
-                              Container(
-                                height: 45,
-                                width: 50,
-                                decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                    image: AssetImage(
-                                      "images/${imgList[index]}.png",
-                                    ),
-                                    fit: BoxFit.cover,
-                                  ),
+                          child: Container(
+                            height: 40,
+                            width: 120,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              color: TColor.primaryColor1,
+                            ),
+                            child: Center(
+                              child: Text(
+                                "Recipe",
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w600,
                                 ),
                               ),
-                              SizedBox(height: 10),
-                              Container(
-                                margin: EdgeInsets.only(bottom: 15),
-                                child: Text(
-                                  catNames[index],
-                                  style: TextStyle(
-                                    fontSize: 10,
-                                    fontWeight: FontWeight.w500,
-                                    color: Colors.black.withOpacity(0.7),
-                                  ),
-                                ),
-                              ),
-                            ],
+                            ),
                           ),
-                        );
-                      },
+                        ),
+                        InkWell(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => VideosPage()),
+                            );
+                          },
+                          child: Container(
+                            height: 40,
+                            width: 120,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              color: TColor.primaryColor1,
+                            ),
+                            child: Center(
+                              child: Text(
+                                "Videos",
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
+                    // GridView.builder(
+                    //   itemCount: catNames.length,
+                    //   shrinkWrap: true,
+                    //   physics: NeverScrollableScrollPhysics(),
+                    //   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    //     crossAxisCount: 4,
+                    //     childAspectRatio: 1.1,
+                    //   ),
+
+                    //   //logo di menu
+                    //   itemBuilder: (context, index) {
+                    //     return GestureDetector(
+                    //       onTap: () {
+                    //         print(catNames[index]);
+                    //         Navigator.pushNamed(context, catPages[index]);
+                    //       },
+                    //       child: Column(
+                    //         children: [
+                    //           Container(
+                    //             height: 45,
+                    //             width: 50,
+                    //             decoration: BoxDecoration(
+                    //               image: DecorationImage(
+                    //                 image: AssetImage(
+                    //                   "images/${imgList[index]}.png",
+                    //                 ),
+                    //                 fit: BoxFit.cover,
+                    //               ),
+                    //             ),
+                    //           ),
+                    //           SizedBox(height: 10),
+                    //           Container(
+                    //             margin: EdgeInsets.only(bottom: 15),
+                    //             child: Text(
+                    //               catNames[index],
+                    //               style: TextStyle(
+                    //                 fontSize: 10,
+                    //                 fontWeight: FontWeight.w500,
+                    //                 color: Colors.black.withOpacity(0.7),
+                    //               ),
+                    //             ),
+                    //           ),
+                    //         ],
+                    //       ),
+                    //     );
+                    //   },
+                    // ),
                     SizedBox(height: 20),
 
                     //grid videos
