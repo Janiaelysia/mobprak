@@ -3,6 +3,8 @@ import 'package:activewell_new/pages/journey.dart';
 import 'package:activewell_new/pages/program.dart';
 import 'package:activewell_new/pages/recipe.dart';
 import 'package:activewell_new/pages/videos.dart';
+import 'package:activewell_new/pages/videoEdo.dart';
+import 'package:activewell_new/pages/recipeEdo.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -133,7 +135,8 @@ class HomePage extends StatelessWidget {
                           onTap: () {
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => RecipesPage()),
+                              MaterialPageRoute(
+                                  builder: (context) => RecipesPage()),
                             );
                           },
                           child: Container(
@@ -158,7 +161,8 @@ class HomePage extends StatelessWidget {
                           onTap: () {
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => VideosPage()),
+                              MaterialPageRoute(
+                                  builder: (context) => VideosPage()),
                             );
                           },
                           child: Container(
@@ -247,7 +251,7 @@ class HomePage extends StatelessWidget {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => VideosPage()),
+                                  builder: (context) => VideosEdo()),
                             );
                           },
                           child: Text(
@@ -337,7 +341,7 @@ class HomePage extends StatelessWidget {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => RecipesPage()),
+                                  builder: (context) => RecipesEdo()),
                             );
                           },
                           child: Text(

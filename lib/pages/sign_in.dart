@@ -11,41 +11,43 @@ class SignInPage extends StatelessWidget {
     final bool isSmallScreen = MediaQuery.of(context).size.width < 600;
 
     return Scaffold(
-      body: Stack(
-        children: [
-          Container(
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height / 2.3,
-            decoration: BoxDecoration(
-              color: Color.fromARGB(255, 235, 235, 240),
-              borderRadius: BorderRadius.only(
-                  bottomRight: Radius.circular(70),
-                  bottomLeft: Radius.circular(70)),
+      body: SingleChildScrollView(
+        child: Stack(
+          children: [
+            Container(
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height / 2.3,
+              decoration: BoxDecoration(
+                color: Color.fromARGB(255, 235, 235, 240),
+                borderRadius: BorderRadius.only(
+                    bottomRight: Radius.circular(70),
+                    bottomLeft: Radius.circular(70)),
+              ),
             ),
-          ),
-          Center(
-            child: isSmallScreen
-                ? Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: const [
-                      _Logo(),
-                      _FormContent(),
-                    ],
-                  )
-                : Container(
-                    padding: const EdgeInsets.all(32.0),
-                    constraints: const BoxConstraints(maxWidth: 800),
-                    child: Row(
+            Center(
+              child: isSmallScreen
+                  ? Column(
+                      mainAxisSize: MainAxisSize.min,
                       children: const [
-                        Expanded(child: _Logo()),
-                        Expanded(
-                          child: Center(child: _FormContent()),
-                        ),
+                        _Logo(),
+                        _FormContent(),
                       ],
+                    )
+                  : Container(
+                      padding: const EdgeInsets.all(32.0),
+                      constraints: const BoxConstraints(maxWidth: 800),
+                      child: Row(
+                        children: const [
+                          Expanded(child: _Logo()),
+                          Expanded(
+                            child: Center(child: _FormContent()),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-          ),
-        ],
+            ),
+          ],
+        ),
       ),
     );
   }
