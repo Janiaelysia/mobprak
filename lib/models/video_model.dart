@@ -19,4 +19,9 @@ class VideoModel extends ChangeNotifier {
         'videoUrl': videoUrl,
         'thumbnailUrl': thumbnailUrl,
       };
+
+  @override
+  String toString() {
+    return 'VideoModel(title: $title, description: $description, videoUrl: $videoUrl, thumbnailUrl: $thumbnailUrl)';
+  }
 }
