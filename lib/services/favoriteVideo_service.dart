@@ -6,8 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 class FavoriteVideoProvider extends StateNotifier<List<VideoModel>> {
   final _userData = FirebaseFirestore.instance;
-  final User? _currentUser = FirebaseAuth.instance.currentUser;
-  User? get currentUser => _currentUser;
+  User? get currentUser => FirebaseAuth.instance.currentUser;
 
   FavoriteVideoProvider()
       : super([
@@ -16,15 +15,15 @@ class FavoriteVideoProvider extends StateNotifier<List<VideoModel>> {
 
   Future<void> addFavoriteVideos(BuildContext context, title,
       String description, String videoUrl, String thumbnailUrl) async {
-    if (_currentUser != null) {
-      print("ini add");
-      print(title);
-      print(_currentUser.uid);
+    if (currentUser != null) {
+      print("Adding favorite videos:");
+      print("Title: $title");
+      print("User UID: ${currentUser!.uid}");
 
       // Check for duplicates
       final duplicateCheck = await _userData
           .collection("users")
-          .doc(_currentUser!.uid)
+          .doc(currentUser!.uid)
           .collection('videos')
           .where('title', isEqualTo: title)
           .get();
@@ -40,7 +39,7 @@ class FavoriteVideoProvider extends StateNotifier<List<VideoModel>> {
       }
 
       // Add new video if no duplicates found
-      await _userData.collection("users").doc(_currentUser.uid)
+      await _userData.collection("users").doc(currentUser!.uid)
         ..collection('videos').add({
           'title': title,
           'description': description,
@@ -52,11 +51,11 @@ class FavoriteVideoProvider extends StateNotifier<List<VideoModel>> {
   }
 
   Future<List<VideoModel>> getFavoriteVideos() async {
-    if (_currentUser != null) {
+    if (currentUser != null) {
       try {
         final snapshot = await _userData
             .collection("users")
-            .doc(_currentUser!.uid)
+            .doc(currentUser!.uid)
             .collection('videos')
             .get();
 
@@ -70,9 +69,10 @@ class FavoriteVideoProvider extends StateNotifier<List<VideoModel>> {
           );
         }).toList();
 
-        print("INI GET");
-        print(_currentUser.uid);
+        print("Fetching favorite videos:");
+        print("User UID: ${currentUser!.uid}");
         print(videos);
+
         state = videos;
         return videos;
       } catch (e) {
@@ -85,12 +85,12 @@ class FavoriteVideoProvider extends StateNotifier<List<VideoModel>> {
   }
 
   Future<void> deleteFavoriteVideos(BuildContext context, String title) async {
-    if (_currentUser != null) {
+    if (currentUser != null) {
       try {
         // Find the document with the matching title
         final querySnapshot = await _userData
             .collection("users")
-            .doc(_currentUser!.uid)
+            .doc(currentUser!.uid)
             .collection('videos')
             .where('title', isEqualTo: title)
             .get();
@@ -99,7 +99,7 @@ class FavoriteVideoProvider extends StateNotifier<List<VideoModel>> {
           // Delete each document that matches thes title
           await _userData
               .collection("users")
-              .doc(_currentUser!.uid)
+              .doc(currentUser!.uid)
               .collection('videos')
               .doc(doc.id)
               .delete();

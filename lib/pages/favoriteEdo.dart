@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../models/video_model.dart';
 import 'package:activewell_new/services/favoriteVideo_service.dart';
 import 'package:activewell_new/services/favoriteRecipe_service.dart';
 
