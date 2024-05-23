@@ -7,10 +7,10 @@ import 'package:firebase_storage/firebase_storage.dart';
 class AuthService {
   final _auth = FirebaseAuth.instance;
   final _userData = FirebaseFirestore.instance;
-  final User? _currentUser = FirebaseAuth.instance.currentUser;
+  // final User? _currentUser = FirebaseAuth.instance.currentUser;
 
   // get current user
-  User? get currentUser => _currentUser;
+  User? get currentUser => _auth.currentUser;
 
   // Registering User
   Future<UserCredential> registerUser(
@@ -25,7 +25,7 @@ class AuthService {
         email: email,
         password: password,
       );
-      createUserDocument(userCredential, fname, lname);
+      await createUserDocument(userCredential, fname, lname);
       return userCredential;
     } on FirebaseAuthException catch (e) {
       throw Exception(e.code);
@@ -59,13 +59,13 @@ class AuthService {
   }
 
   // Log Out
-  void logOutUser() {
-    _auth.signOut();
+  Future<void> logOutUser() async {
+    await _auth.signOut();
   }
 
   // get user data
   Future<DocumentSnapshot<Map<String, dynamic>>> getUserDetails() async {
-    return await _userData.collection("users").doc(_currentUser!.uid).get();
+    return await _userData.collection("users").doc(currentUser!.uid).get();
   }
 
   // change profile picture
@@ -85,7 +85,7 @@ class AuthService {
   Future<String?> getPict() async {
     try {
       final storageRef = FirebaseStorage.instance.ref();
-      final imageRef = storageRef.child('users/' + _currentUser!.uid + '.jpg');
+      final imageRef = storageRef.child('users/' + currentUser!.uid + '.jpg');
       return imageRef.getDownloadURL();
     } catch (e) {
       rethrow;
@@ -95,7 +95,7 @@ class AuthService {
   // edit data
 
   Future<void> changeUserData(String field, newValue) async {
-    await _userData.collection('users').doc(_currentUser!.uid).update({
+    await _userData.collection('users').doc(currentUser!.uid).update({
       field: newValue,
     });
   }
@@ -103,7 +103,7 @@ class AuthService {
   //change password
 
   Future<void> changePassword(String newPassword) async {
-    _currentUser?.updatePassword(newPassword);
+    currentUser?.updatePassword(newPassword);
   }
 
   //get user name by email and return as string

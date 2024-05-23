@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:activewell_new/services/favoriteVideo_service.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../models/video_model.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 class VideosEdo extends ConsumerStatefulWidget {
   const VideosEdo({super.key});

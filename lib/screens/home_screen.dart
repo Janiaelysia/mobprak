@@ -1,5 +1,4 @@
 import 'package:activewell_new/pages/account.dart';
-import 'package:activewell_new/pages/favorite.dart';
 import 'package:activewell_new/pages/favoriteEdo.dart';
 import 'package:activewell_new/pages/home.dart';
 import 'package:activewell_new/pages/tools.dart';

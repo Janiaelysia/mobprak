@@ -6,22 +6,21 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 class FavoriteRecipeProvider extends StateNotifier<List<RecipeModel>> {
   final _userData = FirebaseFirestore.instance;
-  final User? _currentUser = FirebaseAuth.instance.currentUser;
-  User? get currentUser => _currentUser;
+  User? get currentUser => FirebaseAuth.instance.currentUser;
 
   FavoriteRecipeProvider() : super([RecipeModel(title: "", imgUrl: "")]);
 
   Future<void> addFavoriteRecipes(
       BuildContext context, title, String imgUrl) async {
-    if (_currentUser != null) {
-      print("ini add");
-      print(title);
-      print(_currentUser.uid);
+    if (currentUser != null) {
+      print("Adding favorite recipe:");
+      print("Title: $title");
+      print("User UID: ${currentUser!.uid}");
 
 // Check for duplicates
       final duplicateCheck = await _userData
           .collection("users")
-          .doc(_currentUser!.uid)
+          .doc(currentUser!.uid)
           .collection('recipes')
           .where('title', isEqualTo: title)
           .get();
@@ -36,7 +35,7 @@ class FavoriteRecipeProvider extends StateNotifier<List<RecipeModel>> {
         return; // Stop execution since it's a duplicate
       }
 
-      await _userData.collection("users").doc(_currentUser.uid)
+      await _userData.collection("users").doc(currentUser!.uid)
         ..collection('recipes').add({
           'title': title,
           'imgUrl': imgUrl,
@@ -46,11 +45,11 @@ class FavoriteRecipeProvider extends StateNotifier<List<RecipeModel>> {
   }
 
   Future<List<RecipeModel>> getFavoriteRecipes() async {
-    if (_currentUser != null) {
+    if (currentUser != null) {
       try {
         final snapshot = await _userData
             .collection("users")
-            .doc(_currentUser!.uid)
+            .doc(currentUser!.uid)
             .collection('recipes')
             .get();
 
@@ -62,9 +61,10 @@ class FavoriteRecipeProvider extends StateNotifier<List<RecipeModel>> {
           );
         }).toList();
 
-        print("INI GET");
-        print(_currentUser.uid);
+        print("Fetching favorite recipes:");
+        print("User UID: ${currentUser!.uid}");
         print(recipes);
+
         state = recipes;
         return recipes;
       } catch (e) {
@@ -77,12 +77,12 @@ class FavoriteRecipeProvider extends StateNotifier<List<RecipeModel>> {
   }
 
   Future<void> deleteFavoriteRecipes(BuildContext context, title) async {
-    if (_currentUser != null) {
+    if (currentUser != null) {
       try {
         // Find the document with the matching title
         final querySnapshot = await _userData
             .collection("users")
-            .doc(_currentUser!.uid)
+            .doc(currentUser!.uid)
             .collection('recipes')
             .where('title', isEqualTo: title)
             .get();
@@ -91,7 +91,7 @@ class FavoriteRecipeProvider extends StateNotifier<List<RecipeModel>> {
           // Delete each document that matches the title
           await _userData
               .collection("users")
-              .doc(_currentUser!.uid)
+              .doc(currentUser!.uid)
               .collection('recipes')
               .doc(doc.id)
               .delete();
