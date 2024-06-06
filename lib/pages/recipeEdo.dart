@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:activewell_new/services/favoriteRecipe_service.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../models/recipe_model.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 class RecipesEdo extends ConsumerStatefulWidget {
   const RecipesEdo({super.key});
