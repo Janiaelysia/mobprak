@@ -94,19 +94,20 @@ class ToolsPage extends ConsumerWidget {
                                       onPressed: () {
                                         //create pop up that opens up the BMI calculator
                                         showDialog(
-                                            context: context,
-                                            builder: (BuildContext context) {
-                                              return AlertDialog(
-                                                backgroundColor:
-                                                    TColor.primaryColor1,
-                                                content: BmiCalculator(
-                                                    media: media,
-                                                    weightController:
-                                                        weightController,
-                                                    heightController:
-                                                        heightController),
-                                              );
-                                            });
+                                          context: context,
+                                          builder: (BuildContext context) {
+                                            return AlertDialog(
+                                              backgroundColor:
+                                                  TColor.primaryColor1,
+                                              content: BmiCalculator(
+                                                  media: media,
+                                                  weightController:
+                                                      weightController,
+                                                  heightController:
+                                                      heightController),
+                                            );
+                                          },
+                                        );
                                       },
                                     ),
                                   ),

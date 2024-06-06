@@ -179,7 +179,9 @@ class _VideosEdoState extends ConsumerState<VideosEdo>
                                 ),
                                 Expanded(
                                   child: IconButton(
-                                    icon: Icon(Icons.bookmark),
+                                    icon: Icon(
+                                      Icons.bookmark,
+                                    ),
                                     onPressed: () async {
                                       final favoriteVideoProviderNotifier =
                                           ref.read(videoProvider.notifier);

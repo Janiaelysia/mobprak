@@ -255,7 +255,7 @@ class __FormContentState extends State<_FormContent> {
                             _emailController.text, _passwordController.text)
                         .then(
                       (value) {
-                        Navigator.push(
+                        Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(builder: (context) => HomeScreen()),
                         );
@@ -288,7 +288,7 @@ class __FormContentState extends State<_FormContent> {
             SizedBox(height: 4),
             TextButton(
               onPressed: () {
-                Navigator.push(
+                Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(builder: (context) => SignUpPage()),
                 );

@@ -92,21 +92,21 @@ class HomePage extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Icon(
-                          Icons.dashboard,
-                          size: 30,
-                          color: Colors.white,
-                        ),
-                        Icon(
-                          Icons.notifications,
-                          size: 30,
-                          color: Colors.white,
-                        ),
-                      ],
-                    ),
+                    // Row(
+                    //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    //   children: [
+                    //     Icon(
+                    //       Icons.dashboard,
+                    //       size: 30,
+                    //       color: Colors.white,
+                    //     ),
+                    //     Icon(
+                    //       Icons.notifications,
+                    //       size: 30,
+                    //       color: Colors.white,
+                    //     ),
+                    //   ],
+                    // ),
                     SizedBox(height: 20),
                     Padding(
                       padding: EdgeInsets.only(left: 3, bottom: 15),
@@ -128,111 +128,111 @@ class HomePage extends StatelessWidget {
                 padding: EdgeInsets.only(top: 20, left: 15, right: 15),
                 child: Column(
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        InkWell(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => RecipesPage()),
-                            );
-                          },
-                          child: Container(
-                            height: 40,
-                            width: 120,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
-                              color: TColor.primaryColor1,
-                            ),
-                            child: Center(
-                              child: Text(
-                                "Recipe",
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        InkWell(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => VideosPage()),
-                            );
-                          },
-                          child: Container(
-                            height: 40,
-                            width: 120,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
-                              color: TColor.primaryColor1,
-                            ),
-                            child: Center(
-                              child: Text(
-                                "Videos",
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    // GridView.builder(
-                    //   itemCount: catNames.length,
-                    //   shrinkWrap: true,
-                    //   physics: NeverScrollableScrollPhysics(),
-                    //   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    //     crossAxisCount: 4,
-                    //     childAspectRatio: 1.1,
-                    //   ),
-
-                    //   //logo di menu
-                    //   itemBuilder: (context, index) {
-                    //     return GestureDetector(
+                    // Row(
+                    //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    //   children: [
+                    //     InkWell(
                     //       onTap: () {
-                    //         print(catNames[index]);
-                    //         Navigator.pushNamed(context, catPages[index]);
+                    //         Navigator.push(
+                    //           context,
+                    //           MaterialPageRoute(
+                    //               builder: (context) => RecipesPage()),
+                    //         );
                     //       },
-                    //       child: Column(
-                    //         children: [
-                    //           Container(
-                    //             height: 45,
-                    //             width: 50,
-                    //             decoration: BoxDecoration(
-                    //               image: DecorationImage(
-                    //                 image: AssetImage(
-                    //                   "images/${imgList[index]}.png",
-                    //                 ),
-                    //                 fit: BoxFit.cover,
-                    //               ),
+                    //       child: Container(
+                    //         height: 40,
+                    //         width: 120,
+                    //         decoration: BoxDecoration(
+                    //           borderRadius: BorderRadius.circular(20),
+                    //           color: TColor.primaryColor1,
+                    //         ),
+                    //         child: Center(
+                    //           child: Text(
+                    //             "Recipe",
+                    //             style: TextStyle(
+                    //               fontSize: 20,
+                    //               fontWeight: FontWeight.w600,
                     //             ),
                     //           ),
-                    //           SizedBox(height: 10),
-                    //           Container(
-                    //             margin: EdgeInsets.only(bottom: 15),
-                    //             child: Text(
-                    //               catNames[index],
-                    //               style: TextStyle(
-                    //                 fontSize: 10,
-                    //                 fontWeight: FontWeight.w500,
-                    //                 color: Colors.black.withOpacity(0.7),
-                    //               ),
-                    //             ),
-                    //           ),
-                    //         ],
+                    //         ),
                     //       ),
-                    //     );
-                    //   },
+                    //     ),
+                    //     InkWell(
+                    //       onTap: () {
+                    //         Navigator.push(
+                    //           context,
+                    //           MaterialPageRoute(
+                    //               builder: (context) => VideosPage()),
+                    //         );
+                    //       },
+                    //       child: Container(
+                    //         height: 40,
+                    //         width: 120,
+                    //         decoration: BoxDecoration(
+                    //           borderRadius: BorderRadius.circular(20),
+                    //           color: TColor.primaryColor1,
+                    //         ),
+                    //         child: Center(
+                    //           child: Text(
+                    //             "Videos",
+                    //             style: TextStyle(
+                    //               fontSize: 20,
+                    //               fontWeight: FontWeight.w600,
+                    //             ),
+                    //           ),
+                    //         ),
+                    //       ),
+                    //     ),
+                    //   ],
                     // ),
-                    SizedBox(height: 20),
+                    // // GridView.builder(
+                    // //   itemCount: catNames.length,
+                    // //   shrinkWrap: true,
+                    // //   physics: NeverScrollableScrollPhysics(),
+                    // //   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    // //     crossAxisCount: 4,
+                    // //     childAspectRatio: 1.1,
+                    // //   ),
+
+                    // //   //logo di menu
+                    // //   itemBuilder: (context, index) {
+                    // //     return GestureDetector(
+                    // //       onTap: () {
+                    // //         print(catNames[index]);
+                    // //         Navigator.pushNamed(context, catPages[index]);
+                    // //       },
+                    // //       child: Column(
+                    // //         children: [
+                    // //           Container(
+                    // //             height: 45,
+                    // //             width: 50,
+                    // //             decoration: BoxDecoration(
+                    // //               image: DecorationImage(
+                    // //                 image: AssetImage(
+                    // //                   "images/${imgList[index]}.png",
+                    // //                 ),
+                    // //                 fit: BoxFit.cover,
+                    // //               ),
+                    // //             ),
+                    // //           ),
+                    // //           SizedBox(height: 10),
+                    // //           Container(
+                    // //             margin: EdgeInsets.only(bottom: 15),
+                    // //             child: Text(
+                    // //               catNames[index],
+                    // //               style: TextStyle(
+                    // //                 fontSize: 10,
+                    // //                 fontWeight: FontWeight.w500,
+                    // //                 color: Colors.black.withOpacity(0.7),
+                    // //               ),
+                    // //             ),
+                    // //           ),
+                    // //         ],
+                    // //       ),
+                    // //     );
+                    // //   },
+                    // // ),
+                    // SizedBox(height: 20),
 
                     //grid videos
                     Row(
