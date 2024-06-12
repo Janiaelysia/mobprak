@@ -2,7 +2,9 @@ import 'package:activewell_new/pages/about.dart';
 import 'package:activewell_new/pages/profiles/edit_profile_screen.dart';
 import 'package:activewell_new/pages/sign_in.dart';
 import 'package:activewell_new/services/auth_service.dart';
+import 'package:activewell_new/services/bmi_service.dart';
 import 'package:activewell_new/services/user_notifier.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -69,7 +71,8 @@ class _AccountPageState extends ConsumerState<AccountPage> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        userData['image_url'] != ""
+                        userData['image_url'] != null &&
+                                userData['image_url'] != ""
                             ? Container(
                                 width: 135,
                                 height: 135,
@@ -177,10 +180,14 @@ class _AccountPageState extends ConsumerState<AccountPage> {
                           children: [
                             SizedBox(height: 10),
                             ListTile(
-                              onTap: () {
-                                authService.logOutUser();
-                                Navigator.pushReplacement(
-                                  context,
+                              onTap: () async {
+                                ref.read(userProvider.notifier).clear();
+                                ref.read(bmiprovider.notifier).clear();
+                                await FirebaseAuth.instance.signOut();
+                                if (!mounted) {
+                                  return;
+                                }
+                                Navigator.of(context).pushReplacement(
                                   MaterialPageRoute(
                                       builder: (context) => SignInPage()),
                                 );

@@ -19,6 +19,10 @@ class UserNotifier extends StateNotifier<Map<String, String>> {
       'image_url': imageUrl ?? "",
     };
   }
+
+  void clear() {
+    state = {};
+  }
 }
 
 final userProvider =

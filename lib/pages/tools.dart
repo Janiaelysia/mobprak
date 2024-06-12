@@ -1,5 +1,6 @@
 import 'package:activewell_new/common/color_extension.dart';
 import 'package:activewell_new/common_widget/round_button.dart';
+import 'package:activewell_new/models/track_records.dart';
 import 'package:activewell_new/services/bmi_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -14,6 +15,8 @@ class ToolsPage extends ConsumerWidget {
     var weightController = TextEditingController();
     var heightController = TextEditingController();
 
+    var bmiList = ref.watch(bmiprovider);
+
     return Scaffold(
         backgroundColor: TColor.white,
         body: SingleChildScrollView(
@@ -23,13 +26,11 @@ class ToolsPage extends ConsumerWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  //bagian paling atas
+                  // Upper section
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      SizedBox(
-                        height: 15,
-                      ),
+                      SizedBox(height: 15),
                       Text(
                         "Tools",
                         textAlign: TextAlign.center,
@@ -40,11 +41,8 @@ class ToolsPage extends ConsumerWidget {
                       ),
                     ],
                   ),
-                  SizedBox(
-                    height: media.width * 0.05,
-                  ),
-
-                  // bikin kotak ungu BMI
+                  SizedBox(height: media.width * 0.05),
+                  // BMI Container
                   Container(
                     height: media.width * 0.48,
                     decoration: BoxDecoration(
@@ -74,15 +72,15 @@ class ToolsPage extends ConsumerWidget {
                                   SizedBox(
                                     width: 200,
                                     child: Text(
-                                      ref.watch(bmiprovider).first.result,
+                                      bmiList.isNotEmpty
+                                          ? bmiList.first.result
+                                          : "No data",
                                       style: TextStyle(
                                           color: TColor.white.withOpacity(0.9),
                                           fontSize: 14),
                                     ),
                                   ),
-                                  SizedBox(
-                                    height: 8,
-                                  ),
+                                  SizedBox(height: 8),
                                   SizedBox(
                                     width: 120,
                                     height: 35,
@@ -92,7 +90,7 @@ class ToolsPage extends ConsumerWidget {
                                       fontSize: 12,
                                       fontWeight: FontWeight.w400,
                                       onPressed: () {
-                                        //create pop up that opens up the BMI calculator
+                                        // Create pop-up for BMI calculator
                                         showDialog(
                                           context: context,
                                           builder: (BuildContext context) {
@@ -122,7 +120,9 @@ class ToolsPage extends ConsumerWidget {
                                 ),
                                 child: Center(
                                   child: Text(
-                                    ref.watch(bmiprovider).first.bmi.toString(),
+                                    bmiList.isNotEmpty
+                                        ? bmiList.first.bmi.toString()
+                                        : "N/A",
                                     style: TextStyle(
                                         color: TColor.black,
                                         fontSize: 20,
@@ -136,21 +136,24 @@ class ToolsPage extends ConsumerWidget {
                       ],
                     ),
                   ),
-
+                  SizedBox(height: media.width * 0.05),
+                  // BMI Records List
                   SizedBox(
-                    height: media.width * 0.05,
-                  ),
-
-                  //BmiCalculator(media: media, weightController: weightController, heightController: heightController),
-                  SizedBox(
-                      height: media.width * 1,
-                      child: ListView.builder(
-                          shrinkWrap: true,
-                          itemCount: ref.watch(bmiprovider).length,
-                          itemBuilder: (context, index) {
-                            return Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Container(
+                    height: media.width * 1,
+                    child: StreamBuilder<List<TrackRecord>>(
+                      stream: TrackRecord.getTrackRecords(),
+                      builder: (context, snapshot) {
+                        if (!snapshot.hasData) {
+                          return Center(child: CircularProgressIndicator());
+                        } else if (snapshot.data!.isEmpty) {
+                          return Center(child: Text("No data"));
+                        } else {
+                          return ListView.builder(
+                            itemCount: snapshot.data!.length,
+                            itemBuilder: (context, index) {
+                              return Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Container(
                                   decoration: BoxDecoration(
                                       color: TColor.primaryColor1,
                                       borderRadius: BorderRadius.circular(15)),
@@ -159,28 +162,38 @@ class ToolsPage extends ConsumerWidget {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Text(
-                                        "BMI: ${ref.watch(bmiprovider)[index].bmi}",
+                                        "BMI: ",
                                         style: TextStyle(
                                             color: TColor.white,
                                             fontSize: 14,
                                             fontWeight: FontWeight.bold),
                                       ),
                                       Text(
-                                          "Height: ${ref.watch(bmiprovider)[index].height}",
-                                          style: TextStyle(
-                                              color: TColor.white,
-                                              fontSize: 14,
-                                              fontWeight: FontWeight.bold)),
+                                        "Height: ${snapshot.data![index].height}",
+                                        style: TextStyle(
+                                          color: TColor.white,
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
                                       Text(
-                                          "Weight: ${ref.watch(bmiprovider)[index].weight}",
-                                          style: TextStyle(
-                                              color: TColor.white,
-                                              fontSize: 14,
-                                              fontWeight: FontWeight.bold)),
+                                        "Weight: ${snapshot.data![index].weight}",
+                                        style: TextStyle(
+                                          color: TColor.white,
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
                                     ],
-                                  )),
-                            );
-                          })),
+                                  ),
+                                ),
+                              );
+                            },
+                          );
+                        }
+                      },
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -211,87 +224,94 @@ class BmiCalculator extends ConsumerWidget {
         borderRadius: BorderRadius.circular(15),
       ),
       child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(15.0, 25, 15, 2),
-              child: Text("BMI Calculator",
-                  style: TextStyle(
-                      color: TColor.white,
-                      fontSize: 18,
-                      fontWeight: FontWeight.w700)),
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.fromLTRB(15.0, 25, 15, 2),
+            child: Text(
+              "BMI Calculator",
+              style: TextStyle(
+                color: TColor.white,
+                fontSize: 18,
+                fontWeight: FontWeight.w700,
+              ),
             ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(15.0, 20, 15, 2),
-              child: TextField(
-                keyboardType: TextInputType.number,
-                controller: weightController,
-                decoration: InputDecoration(
-                  hintText: "Enter your weight in Kg",
-                  hintStyle: TextStyle(
-                      color: TColor.gray,
-                      fontSize: 14,
-                      fontWeight: FontWeight.w400),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(15),
-                    borderSide: BorderSide.none,
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(15.0, 20, 15, 2),
+            child: TextField(
+              keyboardType: TextInputType.number,
+              controller: weightController,
+              decoration: InputDecoration(
+                hintText: "Enter your weight in Kg",
+                hintStyle: TextStyle(
+                    color: TColor.gray,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w400),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(15),
+                  borderSide: BorderSide.none,
+                ),
+                filled: true,
+                fillColor: TColor.white,
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(15.0, 10, 15, 2),
+            child: TextField(
+              keyboardType: TextInputType.number,
+              controller: heightController,
+              decoration: InputDecoration(
+                hintText: "Enter your height in Cm",
+                hintStyle: TextStyle(
+                    color: TColor.gray,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w400),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(15),
+                  borderSide: BorderSide.none,
+                ),
+                filled: true,
+                fillColor: TColor.white,
+              ),
+            ),
+          ),
+          InkWell(
+            onTap: () {
+              if (weightController.text.isEmpty ||
+                  heightController.text.isEmpty) {
+              } else {
+                ref.read(bmiprovider.notifier).addRecord(
+                    double.parse(heightController.text),
+                    double.parse(weightController.text));
+              }
+              Navigator.pop(context);
+            },
+            child: Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: Container(
+                height: 50,
+                decoration: BoxDecoration(
+                  color: TColor.white,
+                  borderRadius: BorderRadius.circular(25),
+                ),
+                child: Center(
+                  child: Text(
+                    "Calculate",
+                    style: TextStyle(
+                      color: TColor.primaryColor1,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w400,
+                    ),
                   ),
-                  filled: true,
-                  fillColor: TColor.white,
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(15.0, 10, 15, 2),
-              child: TextField(
-                keyboardType: TextInputType.number,
-                controller: heightController,
-                decoration: InputDecoration(
-                  hintText: "Enter your height in Cm",
-                  hintStyle: TextStyle(
-                      color: TColor.gray,
-                      fontSize: 14,
-                      fontWeight: FontWeight.w400),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(15),
-                    borderSide: BorderSide.none,
-                  ),
-                  filled: true,
-                  fillColor: TColor.white,
-                ),
-              ),
-            ),
-            InkWell(
-              onTap: () {
-                if (weightController.text.isEmpty ||
-                    heightController.text.isEmpty) {
-                } else {
-                  ref.read(bmiprovider.notifier).addRecord(
-                      double.parse(heightController.text),
-                      double.parse(weightController.text));
-                }
-                Navigator.pop(context);
-              },
-              child: Padding(
-                padding: const EdgeInsets.all(15.0),
-                child: Container(
-                  height: 50,
-                  decoration: BoxDecoration(
-                    color: TColor.white,
-                    borderRadius: BorderRadius.circular(25),
-                  ),
-                  child: Center(
-                    child: Text("Calculate",
-                        style: TextStyle(
-                            color: TColor.primaryColor1,
-                            fontSize: 12,
-                            fontWeight: FontWeight.w400)),
-                  ),
-                ),
-              ),
-            ),
-          ]),
+          ),
+        ],
+      ),
     );
   }
 }

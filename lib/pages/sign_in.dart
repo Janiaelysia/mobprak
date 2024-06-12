@@ -248,7 +248,7 @@ class __FormContentState extends State<_FormContent> {
                     ),
                   ),
                 ),
-                onPressed: () {
+                onPressed: () async {
                   if (_formKey.currentState?.validate() ?? false) {
                     auth
                         .loginUser(

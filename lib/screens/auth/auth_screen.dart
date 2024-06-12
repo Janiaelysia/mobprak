@@ -1,7 +1,6 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:activewell_new/pages/sign_in.dart';
 import 'package:activewell_new/screens/home_screen.dart';
+import 'package:activewell_new/services/bmi_service.dart';
 import 'package:activewell_new/services/user_notifier.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -17,27 +16,52 @@ class AuthScreen extends ConsumerWidget {
       body: StreamBuilder<User?>(
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (context, snapshot) {
-          if (snapshot.hasData) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasData) {
             final userCredential = snapshot.data;
-            FirebaseFirestore.instance
-                .collection('users')
-                .doc(userCredential!.uid)
-                .get()
-                .then(
-                  (userData) => ref.watch(userProvider.notifier).setUser(
-                        uid: userCredential.uid,
-                        fname: userData.data()!['fname'],
-                        lname: userData.data()!['lname'],
-                        email: userData.data()!['email'],
-                        imageUrl: userData.data()!['image_url'],
-                      ),
-                );
-            return HomeScreen();
+            return FutureBuilder<void>(
+              future: _loadUserData(ref, userCredential!),
+              builder: (context, userSnapshot) {
+                if (userSnapshot.connectionState == ConnectionState.waiting) {
+                  return Center(child: CircularProgressIndicator());
+                } else if (userSnapshot.hasError) {
+                  return Center(child: Text('Error loading user data'));
+                } else {
+                  return HomeScreen();
+                }
+              },
+            );
           } else {
             return SignInPage();
           }
         },
       ),
     );
+  }
+
+  Future<void> _loadUserData(WidgetRef ref, User userCredential) async {
+    // Mengambil data user dari Firestore
+    final userDoc = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(userCredential.uid)
+        .get();
+
+    final userData = userDoc.data();
+    if (userData != null) {
+      ref.read(userProvider.notifier).setUser(
+            uid: userCredential.uid,
+            fname: userData['fname'],
+            lname: userData['lname'],
+            email: userData['email'],
+            imageUrl: userData['image_url'],
+          );
+
+      // Mengambil track record terakhir dari user
+      await ref.read(bmiprovider.notifier).loadRecords();
+    } else {
+      ref.read(userProvider.notifier).clear();
+      ref.read(bmiprovider.notifier).clear();
+    }
   }
 }
