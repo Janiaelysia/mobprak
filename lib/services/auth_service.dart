@@ -63,6 +63,10 @@ class AuthService {
     await _auth.signOut();
   }
 
+  Stream<User?> get user {
+    return _auth.authStateChanges();
+  }
+
   // get user data
   Future<DocumentSnapshot<Map<String, dynamic>>> getUserDetails() async {
     return await _userData.collection("users").doc(currentUser!.uid).get();
