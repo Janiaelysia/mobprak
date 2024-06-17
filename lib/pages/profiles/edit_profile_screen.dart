@@ -30,33 +30,29 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
     _formKey.currentState!.save();
 
     final userData = ref.watch(userProvider);
-    if (userData['uid'] == null || userData['email'] == null) {
-      // Handle null userData
-      return;
-    }
     dynamic imageUrl;
     try {
       setState(() {
         _isLoading = true;
       });
       final storageRef =
-          FirebaseStorage.instance.ref().child('users/${userData['uid']}.jpg');
+          FirebaseStorage.instance.ref().child('users/${userData.uid}.jpg');
 
       if (_selectedImage == null) {
-        imageUrl = userData['image_url'];
+        imageUrl = userData.imageUrl;
       } else {
         await storageRef.putFile(_selectedImage!);
         imageUrl = await storageRef.getDownloadURL();
       }
       ref.watch(userProvider.notifier).setUser(
-          uid: userData['uid']!,
+          uid: userData.uid,
           fname: _fname,
           lname: _lname,
-          email: userData['email']!,
+          email: userData.email,
           imageUrl: imageUrl);
       await FirebaseFirestore.instance
           .collection('users')
-          .doc(userData['uid'])
+          .doc(userData.uid)
           .update({
         'fname': _fname,
         'lname': _lname,
@@ -143,7 +139,7 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
                   height: 10,
                 ),
                 TextFormField(
-                  initialValue: userData['email'],
+                  initialValue: userData.email,
                   readOnly: true,
                   style: TextStyle(
                       fontWeight: FontWeight.normal,
@@ -182,7 +178,7 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
                   height: 10,
                 ),
                 TextFormField(
-                  initialValue: userData['fname'],
+                  initialValue: userData.fname,
                   onSaved: (value) {
                     _fname = value!;
                   },
@@ -230,7 +226,7 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
                   height: 10,
                 ),
                 TextFormField(
-                  initialValue: userData['lname'],
+                  initialValue: userData.lname,
                   validator: (value) {
                     if (value == null || value.trim() == '') {
                       return 'nama tidak boleh kosong!';

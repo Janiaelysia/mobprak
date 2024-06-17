@@ -1,5 +1,4 @@
 import 'package:activewell_new/screens/auth/auth_screen.dart';
-import 'package:activewell_new/screens/home_screen.dart';
 import 'package:activewell_new/services/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:activewell_new/pages/sign_up.dart';
@@ -253,7 +252,9 @@ class __FormContentState extends State<_FormContent> {
                   if (_formKey.currentState?.validate() ?? false) {
                     auth
                         .loginUser(
-                            _emailController.text, _passwordController.text)
+                      email: _emailController.text,
+                      password: _passwordController.text,
+                    )
                         .then(
                       (value) {
                         Navigator.pushReplacement(

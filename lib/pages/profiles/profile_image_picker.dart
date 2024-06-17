@@ -30,9 +30,9 @@ class _ProfileImagePickerState extends ConsumerState<ProfileImagePicker> {
   @override
   Widget build(BuildContext context) {
     final userData = ref.watch(userProvider);
-    var content = userData['image_url'] != ''
+    var content = userData.imageUrl != '' && userData.imageUrl != null
         ? Image.network(
-            userData['image_url']!,
+            userData.email,
             height: 130,
             width: 130,
             fit: BoxFit.cover,

@@ -341,10 +341,10 @@ class _FormContentState extends State<_FormContent> {
 
                     auth
                         .registerUser(
-                      _emailController.text,
-                      _passwordController.text,
-                      _fnameController.text,
-                      _lnameController.text,
+                      email: _emailController.text,
+                      password: _passwordController.text,
+                      fname: _fnameController.text,
+                      lname: _lnameController.text,
                     )
                         .then((value) {
                       ScaffoldMessenger.of(context).showSnackBar(

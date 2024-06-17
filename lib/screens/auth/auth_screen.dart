@@ -54,7 +54,7 @@ class AuthScreen extends ConsumerWidget {
             fname: userData['fname'],
             lname: userData['lname'],
             email: userData['email'],
-            imageUrl: userData['image_url'],
+            imageUrl: userData['imageUrl'],
           );
 
       // Mengambil track record terakhir dari user
