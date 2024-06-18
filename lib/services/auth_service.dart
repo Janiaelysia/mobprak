@@ -1,8 +1,5 @@
-import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 
 class AuthService {
   final _auth = FirebaseAuth.instance;
@@ -13,12 +10,12 @@ class AuthService {
   User? get currentUser => _auth.currentUser;
 
   // Registering User
-  Future<UserCredential> registerUser(
-    String email,
-    password,
-    fname,
-    lname,
-  ) async {
+  Future<UserCredential> registerUser({
+    required String email,
+    required String password,
+    required String fname,
+    required String lname,
+  }) async {
     try {
       UserCredential userCredential =
           await _auth.createUserWithEmailAndPassword(
@@ -37,7 +34,6 @@ class AuthService {
       UserCredential? userCredential, String fname, lname) async {
     if (userCredential != null && userCredential.user != null) {
       await _userData.collection("users").doc(userCredential.user!.uid).set({
-        'uid': userCredential.user!.uid,
         'email': userCredential.user!.email,
         'fname': fname,
         'lname': lname,
@@ -46,7 +42,10 @@ class AuthService {
   }
 
   // Login
-  Future<UserCredential> loginUser(String email, password) async {
+  Future<UserCredential> loginUser({
+    required String email,
+    required String password,
+  }) async {
     try {
       UserCredential userCredential = await _auth.signInWithEmailAndPassword(
         email: email,
@@ -63,41 +62,41 @@ class AuthService {
     await _auth.signOut();
   }
 
+  Stream<User?> get user {
+    return _auth.authStateChanges();
+  }
+
   // get user data
   Future<DocumentSnapshot<Map<String, dynamic>>> getUserDetails() async {
-    return await _userData.collection("users").doc(currentUser!.uid).get();
-  }
-
-  // change profile picture
-
-  Future<void> changeProfilePict(File file, String uid) async {
     try {
-      final storageRef = FirebaseStorage.instance.ref();
-      final imageRef = storageRef.child('users/$uid.jpg');
-      final imageBytes = await file.readAsBytes();
-      await imageRef.putData(imageBytes);
-    } catch (e) {
-      print("Error: $e");
-    }
-  }
-
-  // read profile picture
-  Future<String?> getPict() async {
-    try {
-      final storageRef = FirebaseStorage.instance.ref();
-      final imageRef = storageRef.child('users/' + currentUser!.uid + '.jpg');
-      return imageRef.getDownloadURL();
+      final user =
+          await _userData.collection('users').doc(currentUser!.uid).get();
+      return user;
     } catch (e) {
       rethrow;
     }
   }
 
-  // edit data
+  // change profile picture
 
-  Future<void> changeUserData(String field, newValue) async {
-    await _userData.collection('users').doc(currentUser!.uid).update({
-      field: newValue,
-    });
+  Future<void> updateUserProfile({
+    required String uid,
+    required String name,
+    required String phone,
+    required String address,
+    String? imageUrl,
+  }) async {
+    try {
+      await FirebaseFirestore.instance.collection('users').doc(uid).update({
+        'name': name,
+        'phone': phone,
+        'address': address,
+        'imageUrl': imageUrl ?? '',
+      });
+    } catch (e) {
+      print('Error updating user profile: $e');
+      rethrow;
+    }
   }
 
   //change password

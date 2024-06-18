@@ -1,13 +1,45 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../models/bmi_model.dart';
+import '../models/track_records.dart';
 
-class Bmiprovider extends StateNotifier<List<BmiModel>> {
-  Bmiprovider() : super([BmiModel(height: 0, weight: 0, bmi: 0, result: "")]);
+class Bmiprovider extends StateNotifier<List<TrackRecord>> {
+  Bmiprovider() : super([]);
 
-  void addRecord(double height, double weight) {
+  Future<void> loadRecords() async {
+    final userCredential = FirebaseAuth.instance.currentUser!;
+    final trackRecordsQuery = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(userCredential.uid)
+        .collection('trackRecords')
+        .orderBy('timestamp', descending: true)
+        .get();
+    if (trackRecordsQuery.docs.isNotEmpty) {
+      final trackRecords = trackRecordsQuery.docs.map((doc) {
+        return TrackRecord.fromDocument(doc);
+      }).toList();
+      state = trackRecords;
+    } else {
+      state = [];
+    }
+  }
+
+  void addRecord(double height, double weight) async {
+    DateTime timestamp = DateTime.now();
     double bmi = weight / ((height) / 100 * (height) / 100);
     bmi = double.parse(bmi.toStringAsFixed(2));
     String result;
+    String userId = FirebaseAuth.instance.currentUser!.uid;
+    DocumentReference userRef =
+        FirebaseFirestore.instance.collection('users').doc(userId);
+
+    CollectionReference recordsRef = userRef.collection('trackRecords');
+    await recordsRef.add({
+      'weight': weight,
+      'height': height,
+      'bmi': bmi,
+      'timestamp': timestamp,
+    });
     if (bmi >= 25) {
       result = 'You are Overweight, consider exercising more!';
     } else if (bmi > 18.5) {
@@ -16,12 +48,23 @@ class Bmiprovider extends StateNotifier<List<BmiModel>> {
       result = 'You are underweight, consider eating more!';
     }
     state = [
-      BmiModel(height: height, weight: weight, bmi: bmi, result: result),
+      TrackRecord(
+          height: height,
+          weight: weight,
+          bmi: bmi,
+          timestamp: timestamp,
+          result: result),
       ...state
     ];
   }
+
+  void clear() {
+    state = [];
+  }
 }
 
-final bmiprovider = StateNotifierProvider<Bmiprovider, List<BmiModel>>((ref) {
+// Provider untuk Bmiprovider
+final bmiprovider =
+    StateNotifierProvider<Bmiprovider, List<TrackRecord>>((ref) {
   return Bmiprovider();
 });
