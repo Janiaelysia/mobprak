@@ -1,6 +1,6 @@
 import 'package:activewell_new/common/color_extension.dart';
-import 'package:activewell_new/pages/videoEdo.dart';
-import 'package:activewell_new/pages/recipeEdo.dart';
+import 'package:activewell_new/pages/video.dart';
+import 'package:activewell_new/pages/recipe.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -132,7 +132,7 @@ class HomePage extends StatelessWidget {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => RecipesEdo()),
+                                  builder: (context) => RecipesPage()),
                             );
                           },
                           child: Container(
@@ -158,7 +158,7 @@ class HomePage extends StatelessWidget {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => VideosEdo()),
+                                  builder: (context) => VideosPage()),
                             );
                           },
                           child: Container(
@@ -312,7 +312,7 @@ class HomePage extends StatelessWidget {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => VideosEdo()),
+                                  builder: (context) => VideosPage()),
                             );
                           },
                           child: Text(
@@ -402,7 +402,7 @@ class HomePage extends StatelessWidget {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => RecipesEdo()),
+                                  builder: (context) => RecipesPage()),
                             );
                           },
                           child: Text(

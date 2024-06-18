@@ -6,7 +6,7 @@ import 'package:activewell_new/pages/recipe.dart';
 import 'package:activewell_new/pages/sign_in.dart';
 import 'package:activewell_new/pages/sign_up.dart';
 import 'package:activewell_new/pages/tools.dart';
-import 'package:activewell_new/pages/videos.dart';
+import 'package:activewell_new/pages/video.dart';
 import 'package:activewell_new/screens/home_screen.dart';
 import 'package:activewell_new/screens/splash_screen.dart';
 import 'package:activewell_new/screens/welcome_screen.dart';

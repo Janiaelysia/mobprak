@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:activewell_new/services/favoriteVideo_service.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class VideosEdo extends ConsumerStatefulWidget {
-  const VideosEdo({super.key});
+class VideosPage extends ConsumerStatefulWidget {
+  const VideosPage({super.key});
 
   @override
-  ConsumerState<VideosEdo> createState() => _VideosEdoState();
+  ConsumerState<VideosPage> createState() => _VideosPageState();
 }
 
-class _VideosEdoState extends ConsumerState<VideosEdo>
+class _VideosPageState extends ConsumerState<VideosPage>
     with TickerProviderStateMixin {
   late final TabController _tabController;
 

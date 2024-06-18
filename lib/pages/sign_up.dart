@@ -1,3 +1,4 @@
+import 'package:activewell_new/pages/sign_in.dart';
 import 'package:activewell_new/screens/home_screen.dart';
 import 'package:activewell_new/services/auth_service.dart';
 import 'package:flutter/material.dart';
@@ -370,22 +371,20 @@ class _FormContentState extends State<_FormContent> {
               ),
             ),
             SizedBox(height: 3),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                TextButton(
-                  onPressed: () {
-                    // Action
-                  },
-                  child: Text(
-                    'Forgot Password?',
-                    style: TextStyle(
-                      color: Colors.black54,
-                      fontSize: 12,
-                    ),
-                  ),
+            TextButton(
+              onPressed: () {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => SignInPage()),
+                );
+              },
+              child: Text(
+                'Already have an account',
+                style: TextStyle(
+                  color: Colors.black54,
+                  fontSize: 12,
                 ),
-              ],
+              ),
             ),
             _gap()
           ],

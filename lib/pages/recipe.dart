@@ -1,158 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:activewell_new/services/favoriteRecipe_service.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class RecipesPage extends StatefulWidget {
-  RecipesPage({Key? key}) : super(key: key);
-
-  @override
-  State<RecipesPage> createState() => _RecipesPageState();
-}
-
-class _RecipesPageState extends State<RecipesPage> {
-  int _currentIndex = 0;
-
-  List<Widget> _screen = [MealScreen(), BeverageScreen(), SnackScreen()];
+class RecipesPage extends ConsumerStatefulWidget {
+  const RecipesPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: CustomScrollView(
-        slivers: [
-          SliverAppBar(
-            title: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 35),
-                    child: Text(
-                      "Recipes",
-                      style: TextStyle(
-                        fontSize: 28,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                ],
-              ),
-            ),
-            backgroundColor: Color.fromARGB(255, 237, 86, 59),
-            floating: true,
-            expandedHeight: 100,
-            elevation: 4,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.vertical(
-                bottom: Radius.circular(30),
-              ),
-            ),
-          ),
-          SliverPadding(
-            padding: EdgeInsets.only(
-              right: 18,
-              left: 18,
-              top: 10,
-              bottom: 5,
-            ),
-            sliver: SliverToBoxAdapter(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Expanded(
-                    child: ElevatedButton(
-                      onPressed: () {
-                        setState(() {
-                          _currentIndex = 0;
-                        });
-                      },
-                      child: Text('Meal'),
-                      style: ButtonStyle(
-                        minimumSize: MaterialStateProperty.all(
-                            Size(150, 35)), // lebar minimum tombol
-                        backgroundColor: MaterialStateProperty.all(
-                            Color.fromARGB(255, 237, 86, 59)),
-                        foregroundColor:
-                            MaterialStateProperty.all(Colors.white),
-                        shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30),
-                        )),
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    width: 7,
-                  ),
-                  Expanded(
-                    child: ElevatedButton(
-                      onPressed: () {
-                        setState(() {
-                          _currentIndex = 1;
-                        });
-                      },
-                      child: Text('Beverage'),
-                      style: ButtonStyle(
-                        minimumSize: MaterialStateProperty.all(
-                            Size(150, 35)), // Menentukan lebar minimum tombol
-                        backgroundColor: MaterialStateProperty.all(
-                            Color.fromARGB(255, 237, 86, 59)),
-                        foregroundColor:
-                            MaterialStateProperty.all(Colors.white),
-                        shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30),
-                        )),
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    width: 7,
-                  ),
-                  Expanded(
-                    child: ElevatedButton(
-                      onPressed: () {
-                        setState(() {
-                          _currentIndex = 2;
-                        });
-                      },
-                      child: Text('Snack'),
-                      style: ButtonStyle(
-                        minimumSize: MaterialStateProperty.all(
-                            Size(150, 35)), // Menentukan lebar minimum tombol
-                        backgroundColor: MaterialStateProperty.all(
-                            Color.fromARGB(255, 237, 86, 59)),
-                        foregroundColor:
-                            MaterialStateProperty.all(Colors.white),
-                        shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30),
-                        )),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          _screen[_currentIndex],
-        ],
-      ),
-    );
-  }
+  ConsumerState<RecipesPage> createState() => _RecipesPageState();
 }
 
-class MealScreen extends StatefulWidget {
-  MealScreen({super.key});
+class _RecipesPageState extends ConsumerState<RecipesPage>
+    with TickerProviderStateMixin {
+  // final favoriteRecipeProvider =
+  //     StateNotifierProvider<FavoriteRecipeProvider, List<RecipeModel>>((ref) {
+  //   // final firestore = FirebaseFirestore.instance;
+  //   // final user = FirebaseAuth.instance.currentUser;
+  //   return FavoriteRecipeProvider();
+  // });
 
-  @override
-  State<MealScreen> createState() => _MealScreenState();
-}
+  late final TabController _tabController;
 
-class _MealScreenState extends State<MealScreen> {
   List<String> _judulMeal = [
     "Miso Salmon Nourish Bowl",
     "Healthy Bulgogi Rice Bowl",
@@ -171,66 +38,6 @@ class _MealScreenState extends State<MealScreen> {
     "https://static.chloeting.com/recipes/6299ad825db2ecae8ed41774/images/vegan-cream-of-mushroom-soup-1.jpeg",
   ];
 
-  @override
-  Widget build(BuildContext context) {
-    return SliverList(
-      delegate: SliverChildBuilderDelegate(
-        (BuildContext context, int index) {
-          return Container(
-            height: MediaQuery.of(context).size.height * 0.25,
-            width: MediaQuery.of(context).size.width * 0.5,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              color: Colors.white,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.1),
-                  spreadRadius: 1,
-                  blurRadius: 1,
-                  offset: Offset(0, 1),
-                )
-              ],
-            ),
-            padding: EdgeInsets.all(10),
-            margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(8.0),
-                  child: AspectRatio(
-                    aspectRatio: 3 / 4,
-                    child: Image.network(
-                      _imageMeal[index],
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
-                SizedBox(width: 10),
-                Expanded(
-                  child: Text(
-                    _judulMeal[index],
-                    style: TextStyle(fontSize: 16),
-                  ),
-                ),
-              ],
-            ),
-          );
-        },
-        childCount: _judulMeal.length,
-      ),
-    );
-  }
-}
-
-class BeverageScreen extends StatefulWidget {
-  BeverageScreen({super.key});
-
-  @override
-  State<BeverageScreen> createState() => _BeverageScreenState();
-}
-
-class _BeverageScreenState extends State<BeverageScreen> {
   List<String> _judulBeverage = [
     "Sugar-Free Lemonade",
     "Milk Tea With Coffee Jelly",
@@ -251,66 +58,6 @@ class _BeverageScreenState extends State<BeverageScreen> {
     "https://static.chloeting.com/recipes/62c3a3736f991137b34ceb32/images/3-ingredient-strawberry-boba-1.jpeg",
   ];
 
-  @override
-  Widget build(BuildContext context) {
-    return SliverList(
-      delegate: SliverChildBuilderDelegate(
-        (BuildContext context, int index) {
-          return Container(
-            height: MediaQuery.of(context).size.height * 0.25,
-            width: MediaQuery.of(context).size.width * 0.5,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              color: Colors.white,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.1),
-                  spreadRadius: 1,
-                  blurRadius: 1,
-                  offset: Offset(0, 1),
-                )
-              ],
-            ),
-            padding: EdgeInsets.all(10),
-            margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(8.0),
-                  child: AspectRatio(
-                    aspectRatio: 3 / 4,
-                    child: Image.network(
-                      _imageBeverage[index],
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
-                SizedBox(width: 10),
-                Expanded(
-                  child: Text(
-                    _judulBeverage[index],
-                    style: TextStyle(fontSize: 16),
-                  ),
-                ),
-              ],
-            ),
-          );
-        },
-        childCount: _judulBeverage.length,
-      ),
-    );
-  }
-}
-
-class SnackScreen extends StatefulWidget {
-  SnackScreen({super.key});
-
-  @override
-  State<SnackScreen> createState() => _SnackScreenState();
-}
-
-class _SnackScreenState extends State<SnackScreen> {
   List<String> _judulSnack = [
     "Baked Avocado Eggs",
     "Vegan Mocha Yogurt Bowl",
@@ -332,52 +79,283 @@ class _SnackScreenState extends State<SnackScreen> {
   ];
 
   @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(length: 3, vsync: this);
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return SliverList(
-      delegate: SliverChildBuilderDelegate(
-        (BuildContext context, int index) {
-          return Container(
-            height: MediaQuery.of(context).size.height * 0.25,
-            width: MediaQuery.of(context).size.width * 0.5,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              color: Colors.white,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.1),
-                  spreadRadius: 1,
-                  blurRadius: 1,
-                  offset: Offset(0, 1),
-                )
-              ],
+    return Scaffold(
+      body: CustomScrollView(
+        slivers: <Widget>[
+          SliverAppBar(
+            title: const Text(
+              'Recipes',
+              style: TextStyle(color: Colors.white),
             ),
-            padding: EdgeInsets.all(10),
-            margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(8.0),
-                  child: AspectRatio(
-                    aspectRatio: 3 / 4,
-                    child: Image.network(
-                      _imageSnack[index],
-                      fit: BoxFit.cover,
-                    ),
-                  ),
+            pinned: true,
+            floating: false,
+            flexibleSpace: FlexibleSpaceBar(
+              background: Container(
+                color: Color.fromARGB(
+                    255, 237, 86, 59), // Set your desired background color here
+              ),
+            ),
+            bottom: TabBar(
+              labelColor: Color.fromARGB(255, 255, 255, 255),
+              indicatorColor: Color.fromARGB(255, 205, 141, 130),
+              unselectedLabelColor: Color.fromARGB(255, 252, 157, 141),
+              controller: _tabController,
+              tabs: const <Widget>[
+                Tab(
+                  child: Text('Meal'), // Ganti ikon menjadi teks "meal"
                 ),
-                SizedBox(width: 10),
-                Expanded(
-                  child: Text(
-                    _judulSnack[index],
-                    style: TextStyle(fontSize: 16),
-                  ),
+                Tab(
+                  child: Text('Beverage'),
+                ),
+                Tab(
+                  child: Text('Snack'),
                 ),
               ],
             ),
-          );
-        },
-        childCount: _judulSnack.length,
+          ),
+          SliverFillRemaining(
+            child: TabBarView(
+              controller: _tabController,
+              children: <Widget>[
+                ListView.builder(
+                  itemCount: _judulMeal.length,
+                  itemBuilder: (context, index) {
+                    return Container(
+                      height: MediaQuery.of(context).size.height * 0.125,
+                      width: MediaQuery.of(context).size.width * 0.8,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: Colors.white,
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.1),
+                            spreadRadius: 1,
+                            blurRadius: 1,
+                            offset: Offset(0, 1),
+                          )
+                        ],
+                      ),
+                      padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+                      margin:
+                          EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Flexible(
+                            flex: 2,
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(8.0),
+                              child: AspectRatio(
+                                aspectRatio: 16 / 9,
+                                child: Image.network(
+                                  _imageMeal[index],
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            ),
+                          ),
+                          SizedBox(width: 10),
+                          Expanded(
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                SizedBox(
+                                  child: Text(
+                                    _judulMeal[index],
+                                    style: TextStyle(fontSize: 14),
+                                  ),
+                                  width: 80,
+                                ),
+                                Expanded(
+                                  child: IconButton(
+                                    icon: Icon(Icons.bookmark),
+                                    onPressed: () async {
+                                      final favoriteRecipeProviderNotifier =
+                                          ref.read(recipeProvider.notifier);
+                                      await favoriteRecipeProviderNotifier
+                                          .addFavoriteRecipes(
+                                        context,
+                                        _judulMeal[index],
+                                        _imageMeal[index],
+                                      );
+                                      // Handle save button onPressed event
+                                    },
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                ),
+                ListView.builder(
+                  itemCount: _judulBeverage.length,
+                  itemBuilder: (context, index) {
+                    return Container(
+                      height: MediaQuery.of(context).size.height * 0.125,
+                      width: MediaQuery.of(context).size.width * 0.8,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: Colors.white,
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.1),
+                            spreadRadius: 1,
+                            blurRadius: 1,
+                            offset: Offset(0, 1),
+                          )
+                        ],
+                      ),
+                      padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+                      margin:
+                          EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Flexible(
+                            flex: 2,
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(8.0),
+                              child: AspectRatio(
+                                aspectRatio: 16 / 9,
+                                child: Image.network(
+                                  _imageBeverage[index],
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            ),
+                          ),
+                          SizedBox(width: 10),
+                          Expanded(
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                SizedBox(
+                                  child: Text(
+                                    _judulBeverage[index],
+                                    style: TextStyle(fontSize: 14),
+                                  ),
+                                  width: 80,
+                                ),
+                                Expanded(
+                                  child: IconButton(
+                                    icon: Icon(Icons.bookmark),
+                                    onPressed: () async {
+                                      final favoriteRecipeProviderNotifier =
+                                          ref.read(recipeProvider.notifier);
+                                      await favoriteRecipeProviderNotifier
+                                          .addFavoriteRecipes(
+                                        context,
+                                        _judulBeverage[index],
+                                        _imageBeverage[index],
+                                      );
+                                      // Handle save button onPressed event
+                                    },
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                ),
+                ListView.builder(
+                  itemCount: _judulSnack.length,
+                  itemBuilder: (context, index) {
+                    return Container(
+                      height: MediaQuery.of(context).size.height * 0.125,
+                      width: MediaQuery.of(context).size.width * 0.8,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: Colors.white,
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.1),
+                            spreadRadius: 1,
+                            blurRadius: 1,
+                            offset: Offset(0, 1),
+                          )
+                        ],
+                      ),
+                      padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+                      margin:
+                          EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Flexible(
+                            flex: 2,
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(8.0),
+                              child: AspectRatio(
+                                aspectRatio: 16 / 9,
+                                child: Image.network(
+                                  _imageSnack[index],
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            ),
+                          ),
+                          SizedBox(width: 10),
+                          Expanded(
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                SizedBox(
+                                  child: Text(
+                                    _judulSnack[index],
+                                    style: TextStyle(fontSize: 14),
+                                  ),
+                                  width: 80,
+                                ),
+                                Expanded(
+                                  child: IconButton(
+                                    icon: Icon(Icons.bookmark),
+                                    onPressed: () async {
+                                      final favoriteRecipeProviderNotifier =
+                                          ref.read(recipeProvider.notifier);
+                                      await favoriteRecipeProviderNotifier
+                                          .addFavoriteRecipes(
+                                        context,
+                                        _judulSnack[index],
+                                        _imageSnack[index],
+                                      );
+                                      // Handle save button onPressed event
+                                    },
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }

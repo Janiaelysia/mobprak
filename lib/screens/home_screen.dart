@@ -1,5 +1,5 @@
 import 'package:activewell_new/pages/account.dart';
-import 'package:activewell_new/pages/favoriteEdo.dart';
+import 'package:activewell_new/pages/favorite.dart';
 import 'package:activewell_new/pages/home.dart';
 import 'package:activewell_new/pages/tools.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +15,7 @@ class _HomeScreenState extends State<HomeScreen> {
   static List<Widget> pages = [
     HomePage(),
     ToolsPage(),
-    FavoritePageEdo(),
+    FavoritePage(),
     AccountPage(),
   ];
   int _currentIndex = 0;

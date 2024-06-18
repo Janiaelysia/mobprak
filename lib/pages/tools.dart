@@ -32,7 +32,7 @@ class ToolsPage extends ConsumerWidget {
                     children: [
                       SizedBox(height: 15),
                       Text(
-                        "Tools",
+                        "Calculate your BMI!",
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             color: TColor.gray,
