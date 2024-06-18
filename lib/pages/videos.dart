@@ -31,6 +31,15 @@ class _VideosPageState extends ConsumerState<VideosPage>
     "https://static.chloeting.com/videos/62c4a9cfb88c73c70d9d55d4/84970330-fca7-11ec-a798-935d9eee8a63.jpeg",
   ];
 
+  List<String> _urlTenMin = [
+    "https://youtu.be/aeVsOW1LKyQ",
+    "https://youtu.be/aeVsOW1LKyQ",
+    "https://youtu.be/aeVsOW1LKyQ",
+    "https://youtu.be/aeVsOW1LKyQ",
+    "https://youtu.be/aeVsOW1LKyQ",
+    "https://youtu.be/aeVsOW1LKyQ",
+  ];
+
   List<String> _judulTwentyMin = [
     "Full Body Flat Tummy",
     "Do This and Get Fit",
@@ -225,6 +234,7 @@ class _VideosPageState extends ConsumerState<VideosPage>
                           EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           Flexible(
                             flex: 2,
@@ -301,6 +311,7 @@ class _VideosPageState extends ConsumerState<VideosPage>
                           EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           Flexible(
                             flex: 2,

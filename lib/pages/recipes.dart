@@ -153,6 +153,7 @@ class _RecipesPageState extends ConsumerState<RecipesPage>
                           EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           Flexible(
                             flex: 2,
@@ -227,6 +228,7 @@ class _RecipesPageState extends ConsumerState<RecipesPage>
                           EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           Flexible(
                             flex: 2,
@@ -301,6 +303,7 @@ class _RecipesPageState extends ConsumerState<RecipesPage>
                           EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           Flexible(
                             flex: 2,
