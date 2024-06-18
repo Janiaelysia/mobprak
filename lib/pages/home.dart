@@ -1,6 +1,6 @@
 import 'package:activewell_new/common/color_extension.dart';
-import 'package:activewell_new/pages/video.dart';
-import 'package:activewell_new/pages/recipe.dart';
+import 'package:activewell_new/pages/videos.dart';
+import 'package:activewell_new/pages/recipes.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -37,17 +37,17 @@ class HomePage extends StatelessWidget {
   ];
 
   List<String> thumbList = [
-    "https://static.chloeting.com/videos/61bbdc7e2cb3b78eb6ac2bba/efca6f80-5ed1-11ec-b182-df31ae6aab45.jpeg",
+    "https://static.chloeting.com/videos/61bbfe1c2cb3b78eb6ac2c23/f989c480-5ee5-11ec-9a04-3fd984621d67.jpeg",
     "https://static.chloeting.com/videos/61bbf59552c5c9bf0f2550eb/e43a1620-5ee0-11ec-9a04-3fd984621d67.jpeg",
-    "https://static.chloeting.com/videos/61bbd89dc3d293024898b84d/9ff668d0-5ecf-11ec-b8cd-2976cd667d03.jpeg",
-    "https://static.chloeting.com/videos/61bbdcdd017bbb985e15f8eb/28972560-5ed2-11ec-b99f-c33e6b9468db.jpeg",
+    "https://static.chloeting.com/videos/62c4a9cfb88c73c70d9d55d4/84970330-fca7-11ec-a798-935d9eee8a63.jpeg",
+    "https://static.chloeting.com/videos/65849175be23b57ce10a677b/6abe4220-aea3-11ee-8b18-8b55a7ba3b1c.jpeg",
   ];
 
   List<String> thumbTitle = [
-    "Do This Everyday To Lose Weight",
+    "Do This and Get Fit",
     "Warm Up",
-    "11 Line Abs",
-    "Abs in 2 Weeks",
+    "Core & Arms",
+    "Toned Arms",
   ];
 
   List<String> recList = [
@@ -132,32 +132,6 @@ class HomePage extends StatelessWidget {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => RecipesPage()),
-                            );
-                          },
-                          child: Container(
-                            height: 40,
-                            width: 120,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
-                              color: TColor.primaryColor1,
-                            ),
-                            child: Center(
-                              child: Text(
-                                "Recipe",
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        InkWell(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
                                   builder: (context) => VideosPage()),
                             );
                           },
@@ -171,6 +145,32 @@ class HomePage extends StatelessWidget {
                             child: Center(
                               child: Text(
                                 "Videos",
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        InkWell(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => RecipesPage()),
+                            );
+                          },
+                          child: Container(
+                            height: 40,
+                            width: 120,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              color: TColor.primaryColor1,
+                            ),
+                            child: Center(
+                              child: Text(
+                                "Recipe",
                                 style: TextStyle(
                                   fontSize: 20,
                                   fontWeight: FontWeight.w600,

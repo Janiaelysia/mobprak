@@ -1,4 +1,3 @@
-import 'package:activewell_new/pages/about.dart';
 import 'package:activewell_new/pages/profiles/edit_profile_screen.dart';
 import 'package:activewell_new/pages/sign_in.dart';
 import 'package:activewell_new/screens/auth/edit_password_screen.dart';
