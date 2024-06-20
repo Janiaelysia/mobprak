@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:activewell_new/services/favoriteVideo_service.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart'; // Import youtube_player_flutter package
 
 class VideosPage extends ConsumerStatefulWidget {
   const VideosPage({super.key});
@@ -12,8 +12,9 @@ class VideosPage extends ConsumerStatefulWidget {
 class _VideosPageState extends ConsumerState<VideosPage>
     with TickerProviderStateMixin {
   late final TabController _tabController;
+  late YoutubePlayerController _youtubeController;
 
-  List<String> _judulTenMin = [
+  final List<String> _judulTenMin = [
     "10 Min Intense Abs",
     "10 Min Daily Abs",
     "Toned Arms",
@@ -22,7 +23,7 @@ class _VideosPageState extends ConsumerState<VideosPage>
     "Core & Arms",
   ];
 
-  List<String> _imageTenMin = [
+  final List<String> _imageTenMin = [
     "https://static.chloeting.com/videos/663517d500c230367fe429e6/ed1cabb0-0c79-11ef-854a-c15ecb281560.jpeg",
     "https://static.chloeting.com/videos/6584905afaede632c94fe126/23b147a0-a92c-11ee-9277-3b937f16846b.jpeg",
     "https://static.chloeting.com/videos/65849175be23b57ce10a677b/6abe4220-aea3-11ee-8b18-8b55a7ba3b1c.jpeg",
@@ -31,16 +32,16 @@ class _VideosPageState extends ConsumerState<VideosPage>
     "https://static.chloeting.com/videos/62c4a9cfb88c73c70d9d55d4/84970330-fca7-11ec-a798-935d9eee8a63.jpeg",
   ];
 
-  List<String> _urlTenMin = [
-    "https://youtu.be/aeVsOW1LKyQ",
-    "https://youtu.be/aeVsOW1LKyQ",
-    "https://youtu.be/aeVsOW1LKyQ",
-    "https://youtu.be/aeVsOW1LKyQ",
-    "https://youtu.be/aeVsOW1LKyQ",
-    "https://youtu.be/aeVsOW1LKyQ",
+  final List<String> _urlTenMin = [
+    "aeVsOW1LKyQ",
+    "aeVsOW1LKyQ",
+    "aeVsOW1LKyQ",
+    "aeVsOW1LKyQ",
+    "aeVsOW1LKyQ",
+    "aeVsOW1LKyQ",
   ];
 
-  List<String> _judulTwentyMin = [
+  final List<String> _judulTwentyMin = [
     "Full Body Flat Tummy",
     "Do This and Get Fit",
     "2.000 Reps Workout",
@@ -50,7 +51,7 @@ class _VideosPageState extends ConsumerState<VideosPage>
     "1.000 Reps Workout",
   ];
 
-  List<String> _imageTwentyMin = [
+  final List<String> _imageTwentyMin = [
     "https://static.chloeting.com/videos/61bbef772d47479a9df2358d/3ef80df0-5edd-11ec-b182-df31ae6aab45.jpeg",
     "https://static.chloeting.com/videos/61bbfe1c2cb3b78eb6ac2c23/f989c480-5ee5-11ec-9a04-3fd984621d67.jpeg",
     "https://static.chloeting.com/videos/61bbf1bc017bbb985e15f912/98ecd010-5ede-11ec-883e-77d525cedf9b.jpeg",
@@ -60,8 +61,18 @@ class _VideosPageState extends ConsumerState<VideosPage>
     "https://static.chloeting.com/videos/61bbf3532cb3b78eb6ac2bf7/8c4e6a70-5edf-11ec-b8cd-2976cd667d03.jpeg",
   ];
 
-  List<String> _judulStanding = [
-    "Lean Arms Workout", //eror
+  final List<String> _urlTwentyMin = [
+    "aeVsOW1LKyQ",
+    "aeVsOW1LKyQ",
+    "aeVsOW1LKyQ",
+    "aeVsOW1LKyQ",
+    "aeVsOW1LKyQ",
+    "aeVsOW1LKyQ",
+    "aeVsOW1LKyQ",
+  ];
+
+  final List<String> _judulStanding = [
+    "Lean Arms Workout",
     "Standing Abs",
     "Fat Burn",
     "Calorie Burning HIIT",
@@ -70,8 +81,8 @@ class _VideosPageState extends ConsumerState<VideosPage>
     "Weight Loss HIIT",
   ];
 
-  List<String> _imageStanding = [
-    "https://static.chloeting.com/videos/61bbdeaac3d293024898b867/00b789d0-2aaa-11ef-ba9e-f5dd36a3fc38.jpeg", //eror
+  final List<String> _imageStanding = [
+    "https://static.chloeting.com/videos/61bbdeaac3d293024898b867/00b789d0-2aaa-11ef-ba9e-f5dd36a3fc38.jpeg",
     "https://static.chloeting.com/videos/61bbf2732cb3b78eb6ac2bf4/0666a170-5edf-11ec-b8cd-2976cd667d03.jpeg",
     "https://static.chloeting.com/videos/61bbf2bd2d47479a9df235a2/327be0e0-5edf-11ec-883e-77d525cedf9b.jpeg",
     "https://static.chloeting.com/videos/61bc1df44df7b918c30e8bb3/f49be300-5ef8-11ec-b4e8-6545cdfc138f.jpeg",
@@ -80,15 +91,33 @@ class _VideosPageState extends ConsumerState<VideosPage>
     "https://static.chloeting.com/videos/61ce4f20173d57799999a755/d8793960-69d0-11ec-88d2-07e5364d275e.jpeg",
   ];
 
+  final List<String> _urlStanding = [
+    "aeVsOW1LKyQ",
+    "aeVsOW1LKyQ",
+    "aeVsOW1LKyQ",
+    "aeVsOW1LKyQ",
+    "aeVsOW1LKyQ",
+    "aeVsOW1LKyQ",
+    "aeVsOW1LKyQ",
+  ];
+
   @override
   void initState() {
     super.initState();
     _tabController = TabController(length: 3, vsync: this);
+    _youtubeController = YoutubePlayerController(
+      initialVideoId: 'aeVsOW1LKyQ', // ID video from YouTube URL
+      flags: const YoutubePlayerFlags(
+        autoPlay: false,
+        mute: false,
+      ),
+    );
   }
 
   @override
   void dispose() {
     _tabController.dispose();
+    _youtubeController.dispose();
     super.dispose();
   }
 
@@ -106,8 +135,7 @@ class _VideosPageState extends ConsumerState<VideosPage>
             floating: false,
             flexibleSpace: FlexibleSpaceBar(
               background: Container(
-                color: Color.fromARGB(
-                    255, 237, 86, 59), // Set your desired background color here
+                color: Color.fromARGB(255, 237, 86, 59),
               ),
             ),
             bottom: TabBar(
@@ -117,7 +145,7 @@ class _VideosPageState extends ConsumerState<VideosPage>
               controller: _tabController,
               tabs: const <Widget>[
                 Tab(
-                  child: Text('10 Mins'), // Ganti ikon menjadi teks "meal"
+                  child: Text('10 Mins'),
                 ),
                 Tab(
                   child: Text('20 Mins +'),
@@ -135,78 +163,46 @@ class _VideosPageState extends ConsumerState<VideosPage>
                 ListView.builder(
                   itemCount: _judulTenMin.length,
                   itemBuilder: (context, index) {
-                    return Container(
-                      height: MediaQuery.of(context).size.height * 0.125,
-                      width: MediaQuery.of(context).size.width * 0.8,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.white,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.1),
-                            spreadRadius: 1,
-                            blurRadius: 1,
-                            offset: Offset(0, 1),
-                          )
-                        ],
-                      ),
-                      padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-                      margin:
-                          EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Flexible(
-                            flex: 2,
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(8.0),
-                              child: AspectRatio(
-                                aspectRatio: 16 / 9,
-                                child: Image.network(
-                                  _imageTenMin[index],
-                                  fit: BoxFit.contain,
+                    return GestureDetector(
+                      onTap: () {
+                        _youtubeController.load(_urlTenMin[index]);
+                      },
+                      child: Container(
+                        height: 150,
+                        margin: const EdgeInsets.symmetric(
+                            horizontal: 16, vertical: 8),
+                        child: Stack(
+                          children: [
+                            Positioned.fill(
+                              child: Image.network(
+                                _imageTenMin[index],
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                            Positioned(
+                              bottom: 16,
+                              left: 16,
+                              child: Text(
+                                _judulTenMin[index],
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
                                 ),
                               ),
                             ),
-                          ),
-                          SizedBox(width: 10),
-                          Expanded(
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                SizedBox(
-                                  child: Text(
-                                    _judulTenMin[index],
-                                    style: TextStyle(fontSize: 14),
-                                  ),
-                                  width: 80,
+                            Positioned.fill(
+                              child: Align(
+                                alignment: Alignment.center,
+                                child: YoutubePlayer(
+                                  controller: _youtubeController,
+                                  showVideoProgressIndicator: true,
+                                  progressIndicatorColor: Colors.red,
                                 ),
-                                Expanded(
-                                  child: IconButton(
-                                    icon: Icon(
-                                      Icons.bookmark,
-                                    ),
-                                    onPressed: () async {
-                                      final favoriteVideoProviderNotifier =
-                                          ref.read(videoProvider.notifier);
-                                      await favoriteVideoProviderNotifier
-                                          .addFavoriteVideos(
-                                        context,
-                                        _judulTenMin[index],
-                                        'Sample Description',
-                                        'http://example.com/video.mp4',
-                                        _imageTenMin[index],
-                                      );
-                                      // Handle save button onPressed event
-                                    },
-                                  ),
-                                ),
-                              ],
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     );
                   },
@@ -214,76 +210,46 @@ class _VideosPageState extends ConsumerState<VideosPage>
                 ListView.builder(
                   itemCount: _judulTwentyMin.length,
                   itemBuilder: (context, index) {
-                    return Container(
-                      height: MediaQuery.of(context).size.height * 0.125,
-                      width: MediaQuery.of(context).size.width * 0.8,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.white,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.1),
-                            spreadRadius: 1,
-                            blurRadius: 1,
-                            offset: Offset(0, 1),
-                          )
-                        ],
-                      ),
-                      padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-                      margin:
-                          EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Flexible(
-                            flex: 2,
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(8.0),
-                              child: AspectRatio(
-                                aspectRatio: 16 / 9,
-                                child: Image.network(
-                                  _imageTwentyMin[index],
-                                  fit: BoxFit.contain,
+                    return GestureDetector(
+                      onTap: () {
+                        _youtubeController.load(_urlTwentyMin[index]);
+                      },
+                      child: Container(
+                        height: 150,
+                        margin: const EdgeInsets.symmetric(
+                            horizontal: 16, vertical: 8),
+                        child: Stack(
+                          children: [
+                            Positioned.fill(
+                              child: Image.network(
+                                _imageTwentyMin[index],
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                            Positioned(
+                              bottom: 16,
+                              left: 16,
+                              child: Text(
+                                _judulTwentyMin[index],
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
                                 ),
                               ),
                             ),
-                          ),
-                          SizedBox(width: 10),
-                          Expanded(
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                SizedBox(
-                                  child: Text(
-                                    _judulTwentyMin[index],
-                                    style: TextStyle(fontSize: 14),
-                                  ),
-                                  width: 80,
+                            Positioned.fill(
+                              child: Align(
+                                alignment: Alignment.center,
+                                child: YoutubePlayer(
+                                  controller: _youtubeController,
+                                  showVideoProgressIndicator: true,
+                                  progressIndicatorColor: Colors.red,
                                 ),
-                                Expanded(
-                                  child: IconButton(
-                                    icon: Icon(Icons.bookmark),
-                                    onPressed: () async {
-                                      final favoriteVideoProviderNotifier =
-                                          ref.read(videoProvider.notifier);
-                                      await favoriteVideoProviderNotifier
-                                          .addFavoriteVideos(
-                                        context,
-                                        _judulTwentyMin[index],
-                                        'Sample Description',
-                                        'http://example.com/video.mp4',
-                                        _imageTwentyMin[index],
-                                      );
-                                      // Handle save button onPressed event
-                                    },
-                                  ),
-                                ),
-                              ],
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     );
                   },
@@ -291,76 +257,46 @@ class _VideosPageState extends ConsumerState<VideosPage>
                 ListView.builder(
                   itemCount: _judulStanding.length,
                   itemBuilder: (context, index) {
-                    return Container(
-                      height: MediaQuery.of(context).size.height * 0.125,
-                      width: MediaQuery.of(context).size.width * 0.8,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.white,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.1),
-                            spreadRadius: 1,
-                            blurRadius: 1,
-                            offset: Offset(0, 1),
-                          )
-                        ],
-                      ),
-                      padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-                      margin:
-                          EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Flexible(
-                            flex: 2,
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(8.0),
-                              child: AspectRatio(
-                                aspectRatio: 16 / 9,
-                                child: Image.network(
-                                  _imageStanding[index],
-                                  fit: BoxFit.contain,
+                    return GestureDetector(
+                      onTap: () {
+                        _youtubeController.load(_urlStanding[index]);
+                      },
+                      child: Container(
+                        height: 150,
+                        margin: const EdgeInsets.symmetric(
+                            horizontal: 16, vertical: 8),
+                        child: Stack(
+                          children: [
+                            Positioned.fill(
+                              child: Image.network(
+                                _imageStanding[index],
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                            Positioned(
+                              bottom: 16,
+                              left: 16,
+                              child: Text(
+                                _judulStanding[index],
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
                                 ),
                               ),
                             ),
-                          ),
-                          SizedBox(width: 10),
-                          Expanded(
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                SizedBox(
-                                  child: Text(
-                                    _judulStanding[index],
-                                    style: TextStyle(fontSize: 14),
-                                  ),
-                                  width: 80,
+                            Positioned.fill(
+                              child: Align(
+                                alignment: Alignment.center,
+                                child: YoutubePlayer(
+                                  controller: _youtubeController,
+                                  showVideoProgressIndicator: true,
+                                  progressIndicatorColor: Colors.red,
                                 ),
-                                Expanded(
-                                  child: IconButton(
-                                    icon: Icon(Icons.bookmark),
-                                    onPressed: () async {
-                                      final favoriteVideoProviderNotifier =
-                                          ref.read(videoProvider.notifier);
-                                      await favoriteVideoProviderNotifier
-                                          .addFavoriteVideos(
-                                        context,
-                                        _judulStanding[index],
-                                        'Sample Description',
-                                        'http://example.com/video.mp4',
-                                        _imageStanding[index],
-                                      );
-                                      // Handle save button onPressed event
-                                    },
-                                  ),
-                                ),
-                              ],
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     );
                   },
