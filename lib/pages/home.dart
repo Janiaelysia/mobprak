@@ -38,7 +38,7 @@ class HomePage extends StatelessWidget {
 
   List<String> thumbList = [
     "https://static.chloeting.com/videos/61bbfe1c2cb3b78eb6ac2c23/f989c480-5ee5-11ec-9a04-3fd984621d67.jpeg",
-    "https://static.chloeting.com/videos/61bbf59552c5c9bf0f2550eb/e43a1620-5ee0-11ec-9a04-3fd984621d67.jpeg",
+    "https://static.chloeting.com/videos/61bbf59552c5c9bf0f2550eb/d42ae580-2de0-11ef-8a2f-57a8e8858c98.jpeg",
     "https://static.chloeting.com/videos/62c4a9cfb88c73c70d9d55d4/84970330-fca7-11ec-a798-935d9eee8a63.jpeg",
     "https://static.chloeting.com/videos/65849175be23b57ce10a677b/6abe4220-aea3-11ee-8b18-8b55a7ba3b1c.jpeg",
   ];
@@ -51,17 +51,17 @@ class HomePage extends StatelessWidget {
   ];
 
   List<String> recList = [
-    "https://static.chloeting.com/recipes/6200d5a52e702a81e5803c59/images/baked-avocado-eggs-1.webp",
-    "https://static.chloeting.com/recipes/627605807a2bc9cd25c38ebf/images/banana-oatmeal-pancakes-2.webp",
     "https://static.chloeting.com/recipes/6379e20bcab051845d4f5649/images/sugar-free-lemonade-1668932113353-2.webp",
-    "https://static.chloeting.com/recipes/63fd4196b0fc5ec5bd7649d3/images/easy-microwave-baked-potato-1677541785445-1.webp",
+    "https://static.chloeting.com/recipes/62ce6c1387e357875647b592/images/lemon-garlic-chicken-zoodles-1.jpeg",
+    "https://activewell.arduino22.cloud/storage/recipe_image/9wenOQlVL04QTizTIUm7ZSAOn8DeOOf0pBxvbysC.jpg",
+    "https://static.chloeting.com/recipes/6200b658f6b3f08bdababb66/images/low-sugar-honey-soy-chicken-1.jpeg",
   ];
 
   List<String> recTitle = [
-    "Featured Recipes",
-    "Easy Breakfast Ideas",
-    "Healthy Drinks Recipes",
-    "Easy Vegan Recipes",
+    "Sugar-Free Lemonade",
+    "Lemon Garlic Chicken Zoodles",
+    "Tuna Potato Egg Salad",
+    "Low-Sugar Honey Soy Chicken",
   ];
 
   @override
