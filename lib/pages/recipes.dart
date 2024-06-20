@@ -133,74 +133,85 @@ class _RecipesPageState extends ConsumerState<RecipesPage>
                 ListView.builder(
                   itemCount: _judulMeal.length,
                   itemBuilder: (context, index) {
-                    return Container(
-                      height: MediaQuery.of(context).size.height * 0.125,
-                      width: MediaQuery.of(context).size.width * 0.8,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.white,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.1),
-                            spreadRadius: 1,
-                            blurRadius: 1,
-                            offset: Offset(0, 1),
-                          )
-                        ],
-                      ),
-                      padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-                      margin:
-                          EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Flexible(
-                            flex: 2,
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(8.0),
-                              child: AspectRatio(
-                                aspectRatio: 16 / 9,
-                                child: Image.network(
-                                  _imageMeal[index],
-                                  fit: BoxFit.cover,
+                    return GestureDetector(
+                      onTap: () {
+                        // Navigator.push(
+                        //   context,
+                        //   MaterialPageRoute(
+                        //     builder: (context) => detailRecipes(),
+                        //   ),
+                        // );
+                        Navigator.of(context).pushNamed('/detailrec');
+                      },
+                      child: Container(
+                        height: MediaQuery.of(context).size.height * 0.125,
+                        width: MediaQuery.of(context).size.width * 0.8,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: Colors.white,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.1),
+                              spreadRadius: 1,
+                              blurRadius: 1,
+                              offset: Offset(0, 1),
+                            )
+                          ],
+                        ),
+                        padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+                        margin:
+                            EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Flexible(
+                              flex: 2,
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(8.0),
+                                child: AspectRatio(
+                                  aspectRatio: 16 / 9,
+                                  child: Image.network(
+                                    _imageMeal[index],
+                                    fit: BoxFit.cover,
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                          SizedBox(width: 10),
-                          Expanded(
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                SizedBox(
-                                  child: Text(
-                                    _judulMeal[index],
-                                    style: TextStyle(fontSize: 14),
+                            SizedBox(width: 10),
+                            Expanded(
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  SizedBox(
+                                    child: Text(
+                                      _judulMeal[index],
+                                      style: TextStyle(fontSize: 14),
+                                    ),
+                                    width: 80,
                                   ),
-                                  width: 80,
-                                ),
-                                Expanded(
-                                  child: IconButton(
-                                    icon: Icon(Icons.bookmark),
-                                    onPressed: () async {
-                                      final favoriteRecipeProviderNotifier =
-                                          ref.read(recipeProvider.notifier);
-                                      await favoriteRecipeProviderNotifier
-                                          .addFavoriteRecipes(
-                                        context,
-                                        _judulMeal[index],
-                                        _imageMeal[index],
-                                      );
-                                      // Handle save button onPressed event
-                                    },
+                                  Expanded(
+                                    child: IconButton(
+                                      icon: Icon(Icons.bookmark),
+                                      onPressed: () async {
+                                        final favoriteRecipeProviderNotifier =
+                                            ref.read(recipeProvider.notifier);
+                                        await favoriteRecipeProviderNotifier
+                                            .addFavoriteRecipes(
+                                          context,
+                                          _judulMeal[index],
+                                          _imageMeal[index],
+                                        );
+                                        // Handle save button onPressed event
+                                      },
+                                    ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     );
                   },
