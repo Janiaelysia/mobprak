@@ -47,7 +47,7 @@ class _detailSnack2State extends State<detailSnack2> {
                             bottom: 10,
                           ),
                           child: Image.network(
-                            "https://static.chloeting.com/recipes/6200b37d382ba4ec17393dbd/images/miso-salmon-nourish-bowl-1.webp",
+                            "https://static.chloeting.com/recipes/6257bb86e9e3489bf46b2f2d/images/black-olive-tapenade-1.jpeg",
                             width: 300,
                             height: 400,
                             fit: BoxFit.fill,
