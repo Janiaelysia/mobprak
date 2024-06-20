@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class detailMeal2 extends StatefulWidget {
-  const detailMeal2({super.key});
+class detailMeal3 extends StatefulWidget {
+  const detailMeal3({super.key});
 
   @override
-  State<detailMeal2> createState() => _detailMeal2State();
+  State<detailMeal3> createState() => _detailMeal3State();
 }
 
-class _detailMeal2State extends State<detailMeal2> {
+class _detailMeal3State extends State<detailMeal3> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,7 +62,7 @@ class _detailMeal2State extends State<detailMeal2> {
                             bottom: 10,
                           ),
                           child: Image.network(
-                            "https://static.chloeting.com/recipes/6200b37d382ba4ec17393dbd/images/miso-salmon-nourish-bowl-1.webp",
+                            "https://activewell.arduino22.cloud/storage/recipe_image/9wenOQlVL04QTizTIUm7ZSAOn8DeOOf0pBxvbysC.jpg",
                             width: 300,
                             height: 400,
                             fit: BoxFit.fill,
@@ -71,7 +71,7 @@ class _detailMeal2State extends State<detailMeal2> {
                         SizedBox(height: 10),
                         Container(
                           child: Text(
-                            "Miso Salmon Nourish Bowl",
+                            "Tuna Potato Egg Salad",
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               fontSize: 22,
@@ -102,7 +102,7 @@ class _detailMeal2State extends State<detailMeal2> {
                       SizedBox(height: 10),
                       Container(
                         child: Text(
-                          "10 menit",
+                          "30 menit",
                           textAlign: TextAlign.justify,
                           style: TextStyle(
                             fontSize: 18,
@@ -129,7 +129,7 @@ class _detailMeal2State extends State<detailMeal2> {
                       SizedBox(height: 10),
                       Container(
                         child: Text(
-                          "Salad tahu kari enak & pengganti sandwich telur kari! Bubuk kari memiliki banyak manfaat. Salad ini cocok untuk sandwich, wraps, atau topping untuk kerupuk nasi.",
+                          "Salad telur kentang tuna yang mewah dan kaya protein ini sangat mudah dibuat dan jauh lebih padat nutrisi daripada salad kentang biasa.",
                           textAlign: TextAlign.justify,
                           style: TextStyle(
                             fontSize: 18,
@@ -156,7 +156,7 @@ class _detailMeal2State extends State<detailMeal2> {
                       SizedBox(height: 10),
                       Container(
                         child: Text(
-                          "200 gram Tahu keras, 1 sendok teh Mustard kuning, 1 sendok teh tahini, 1 sendok teh jus jeruk nipis, 1,5 sdm bubuk kari, 1 sendok teh bubuk bawang, 1/2 sdt bubuk bawang putih, 1/4 sdt Kunyit, 1/4 sdt paprika, 1/2 sdt garam hitam, 1/4 sdt merica putih, Sejumput lada hitam.",
+                          "400 gram kentang, 300 gram tuna, 3 telur, 1 sendok teh minyak zaitun extra virgin, 1 sendok teh air, 2 sdm cuka anggur putih, 1 sendok teh mustard, ¼ bawang merah, 1/4 sdt bubuk bawang putih, Garam, Merica.",
                           textAlign: TextAlign.justify,
                           style: TextStyle(
                             fontSize: 18,
@@ -183,7 +183,7 @@ class _detailMeal2State extends State<detailMeal2> {
                       SizedBox(height: 10),
                       Container(
                         child: Text(
-                          "1. Tiriskan tahu dan keringkan dengan handuk kertas. Hancurkan ke dalam mangkuk besar dengan tangan anda. 2. Tambahkan semua bahan lainnya selain roti gandum. Campur hingga tercampur. 3. Tambahkan tahu yang sudah dihancurkan ke dalam wadah pencampur dan aduk hingga tercampur. 4. Susun sandwich dengan melapisi satu potong roti, selada, salad telur kari vegan, dan taburi dengan potongan roti kedua.",
+                          "1. Didihkan air dalam panci besar, lalu rebus kentang selama 10-15 menit atau sampai empuk. Tiriskan dan biarkan dingin sebelum dipotong menjadi kubus berukuran 1 inci.2. Siapkan dressingnya dengan cara mengocok semua bahan dressing dalam wadah kecil hingga tercampur. 3. Masukkan telur dengan hati-hati ke dalam panci berisi air dingin. Pastikan telur terendam air setinggi 1-2 inci. Didihkan air dengan api sedang dan masak telur selama 6-8 menit atau matang sesuai keinginan. Sementara itu, siapkan rendaman es. Jika telur sudah matang, keluarkan dari panci dan segera masukkan ke dalam penangas es. Kupas telur dan potong kecil-kecil.4. Tambahkan kentang cincang, telur, dan tuna yang sudah dikeringkan ke dalam mangkuk besar. Gerimis saus ke seluruh bagian dan aduk hingga tercampur. Bumbui sesuai selera dengan lebih banyak garam dan merica jika perlu. ",
                           textAlign: TextAlign.justify,
                           style: TextStyle(
                             fontSize: 18,

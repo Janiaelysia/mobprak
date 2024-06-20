@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class detailMeal2 extends StatefulWidget {
-  const detailMeal2({super.key});
+class detailMeal4 extends StatefulWidget {
+  const detailMeal4({super.key});
 
   @override
-  State<detailMeal2> createState() => _detailMeal2State();
+  State<detailMeal4> createState() => _detailMeal4State();
 }
 
-class _detailMeal2State extends State<detailMeal2> {
+class _detailMeal4State extends State<detailMeal4> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,7 +62,7 @@ class _detailMeal2State extends State<detailMeal2> {
                             bottom: 10,
                           ),
                           child: Image.network(
-                            "https://static.chloeting.com/recipes/62ce6c1387e357875647b592/images/lemon-garlic-chicken-zoodles-1.jpeg",
+                            "https://static.chloeting.com/recipes/6200b658f6b3f08bdababb66/images/low-sugar-honey-soy-chicken-1.jpeg",
                             width: 300,
                             height: 400,
                             fit: BoxFit.fill,
@@ -71,7 +71,7 @@ class _detailMeal2State extends State<detailMeal2> {
                         SizedBox(height: 10),
                         Container(
                           child: Text(
-                            "Lemon Garlic Chicken Zoodles",
+                            "Low-Sugar Honey Soy Chicken",
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               fontSize: 22,
@@ -102,7 +102,7 @@ class _detailMeal2State extends State<detailMeal2> {
                       SizedBox(height: 10),
                       Container(
                         child: Text(
-                          "30 menit",
+                          "40 menit",
                           textAlign: TextAlign.justify,
                           style: TextStyle(
                             fontSize: 18,
@@ -129,7 +129,7 @@ class _detailMeal2State extends State<detailMeal2> {
                       SizedBox(height: 10),
                       Container(
                         child: Text(
-                          "Ayam dilapisi saus mentega bawang putih lemon disajikan dengan mie zucchini. Makanan beraroma, rendah karbohidrat, dan tinggi protein.",
+                          "Ayam kedelai madu versi rendah gula. Saus yang lebih sehat ini lebih rendah gula namun tetap kental dan mengkilat dan enak! ",
                           textAlign: TextAlign.justify,
                           style: TextStyle(
                             fontSize: 18,
@@ -156,7 +156,7 @@ class _detailMeal2State extends State<detailMeal2> {
                       SizedBox(height: 10),
                       Container(
                         child: Text(
-                          "400 gram dada ayam, 4 timun Jepang, 1 bawang bombai, 4 siung bawang putih, 1 lemon dijus, 1 sendok teh saus Worcestershire, 1 sendok the kecap, 2 sdm mentega, Garam secukupnya, Merica.",
+                          "2 fillet dada ayam, 1/2 sdt kanji dr tepung jagung, 1 sendok teh air, 1 sendok the madu, 2 sdm pemanis erythritol buah biksu, 2 sdm kecap asin, 1/4 sdt bubuk bawang putih, 1 sendok teh minyak wijen. ",
                           textAlign: TextAlign.justify,
                           style: TextStyle(
                             fontSize: 18,
@@ -183,7 +183,7 @@ class _detailMeal2State extends State<detailMeal2> {
                       SizedBox(height: 10),
                       Container(
                         child: Text(
-                          "1. Potong dadu ayam dan bawang bombay. Cincang bawang putih. Spiralisasikan zucchini menjadi mie.2. Panaskan mentega dalam wajan antilengket besar dengan api sedang. Tambahkan bawang bombay dan bawang putih lalu masak hingga harum.3. Tingkatkan panas hingga sedang-tinggi. Tambahkan ayam dan masak sampai semua sisi berwarna keemasan, aduk sesekali.4. Tambahkan jus lemon, kecap inggris, kecap asin, garam dan merica. Aduk hingga tercampur dan lanjutkan memasak hingga sebagian besar cairan menguap.5.  Angkat ayam dari wajan dan biarkan tetap hangat. Tambahkan zucchini spiral ke dalam wajan dan masak dengan api sedang-besar sampai empuk, bumbui dengan garam dan merica sesuai selera.6. Tambahkan ayam kembali ke wajan dan aduk semuanya hingga tercampur. ",
+                          "1. Dada ayam potong dadu ukuran sedang. 2. Dalam mangkuk besar, tambahkan madu, pemanis eritritol buah biksu, kecap asin, dan minyak wijen, lalu aduk hingga tercampur. Tambahkan ayam potong dadu dan aduk hingga rata. Tutup dan biarkan meresap di lemari es setidaknya selama 30 menit atau semalaman. 3. Panaskan wajan antilengket dengan api sedang, masukkan ayam dan seluruh bumbu marinasi. Masak selama 5-6 menit atau sampai ayam matang, aduk sesekali. 4. Dalam mangkuk kecil, larutkan tepung maizena dalam air. 5. Tambahkan campuran tepung maizena ke dalam wajan dan aduk hingga saus mengental hingga kekentalan yang diinginkan. Jika terlalu kental, tambahkan sedikit air. 6. Angkat dari api dan sajikan segera dengan nasi kukus/nasi kembang kol dan sayuran kukus favorit Anda. ",
                           textAlign: TextAlign.justify,
                           style: TextStyle(
                             fontSize: 18,

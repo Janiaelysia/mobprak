@@ -37,21 +37,6 @@ class _detailMeal1State extends State<detailMeal1> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Center(
-                    // child: Container(
-                    //   width: 135,
-                    //   height: 135,
-                    //   decoration: BoxDecoration(
-                    //     border: Border.all(
-                    //         color: Color.fromARGB(255, 237, 237, 237),
-                    //         width: 7),
-                    //     shape: BoxShape.rectangle,
-                    //     image: DecorationImage(
-                    //       image: NetworkImage(
-                    //           "https://static.chloeting.com/recipes/6200b37d382ba4ec17393dbd/images/miso-salmon-nourish-bowl-1.webp"),
-                    //       fit: BoxFit.cover,
-                    //     ),
-                    //   ),
-                    // ),
                     child: Column(
                       children: [
                         Container(
@@ -62,7 +47,7 @@ class _detailMeal1State extends State<detailMeal1> {
                             bottom: 10,
                           ),
                           child: Image.network(
-                            "https://static.chloeting.com/recipes/6200b37d382ba4ec17393dbd/images/miso-salmon-nourish-bowl-1.webp",
+                            "https://static.chloeting.com/recipes/61fcbd362a18c23f7d7f8af3/images/vegan-curried-egg-sandwich-1.webp",
                             width: 300,
                             height: 400,
                             fit: BoxFit.fill,
@@ -71,7 +56,7 @@ class _detailMeal1State extends State<detailMeal1> {
                         SizedBox(height: 10),
                         Container(
                           child: Text(
-                            "Miso Salmon Nourish Bowl",
+                            "Vegan Curried Egg Sandwich",
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               fontSize: 22,

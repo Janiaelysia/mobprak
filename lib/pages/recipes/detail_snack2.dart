@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class detailMeal2 extends StatefulWidget {
-  const detailMeal2({super.key});
+class detailSnack2 extends StatefulWidget {
+  const detailSnack2({super.key});
 
   @override
-  State<detailMeal2> createState() => _detailMeal2State();
+  State<detailSnack2> createState() => _detailSnack2State();
 }
 
-class _detailMeal2State extends State<detailMeal2> {
+class _detailSnack2State extends State<detailSnack2> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,21 +37,6 @@ class _detailMeal2State extends State<detailMeal2> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Center(
-                    // child: Container(
-                    //   width: 135,
-                    //   height: 135,
-                    //   decoration: BoxDecoration(
-                    //     border: Border.all(
-                    //         color: Color.fromARGB(255, 237, 237, 237),
-                    //         width: 7),
-                    //     shape: BoxShape.rectangle,
-                    //     image: DecorationImage(
-                    //       image: NetworkImage(
-                    //           "https://static.chloeting.com/recipes/6200b37d382ba4ec17393dbd/images/miso-salmon-nourish-bowl-1.webp"),
-                    //       fit: BoxFit.cover,
-                    //     ),
-                    //   ),
-                    // ),
                     child: Column(
                       children: [
                         Container(
@@ -62,7 +47,7 @@ class _detailMeal2State extends State<detailMeal2> {
                             bottom: 10,
                           ),
                           child: Image.network(
-                            "https://static.chloeting.com/recipes/62ce6c1387e357875647b592/images/lemon-garlic-chicken-zoodles-1.jpeg",
+                            "https://static.chloeting.com/recipes/6200b37d382ba4ec17393dbd/images/miso-salmon-nourish-bowl-1.webp",
                             width: 300,
                             height: 400,
                             fit: BoxFit.fill,
@@ -71,7 +56,7 @@ class _detailMeal2State extends State<detailMeal2> {
                         SizedBox(height: 10),
                         Container(
                           child: Text(
-                            "Lemon Garlic Chicken Zoodles",
+                            "Black Olive Tapenade",
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               fontSize: 22,
@@ -102,7 +87,7 @@ class _detailMeal2State extends State<detailMeal2> {
                       SizedBox(height: 10),
                       Container(
                         child: Text(
-                          "30 menit",
+                          "5 menit",
                           textAlign: TextAlign.justify,
                           style: TextStyle(
                             fontSize: 18,
@@ -129,7 +114,7 @@ class _detailMeal2State extends State<detailMeal2> {
                       SizedBox(height: 10),
                       Container(
                         child: Text(
-                          "Ayam dilapisi saus mentega bawang putih lemon disajikan dengan mie zucchini. Makanan beraroma, rendah karbohidrat, dan tinggi protein.",
+                          "Tapenade adalah olesan Prancis lezat yang terbuat dari zaitun cincang, caper, dan ikan teri. Nikmati tapenade zaitun hitam 5 menit yang mudah ini di atas roti atau sandwich, atau sajikan dengan sayuran atau sebagai isian jamur portobello!",
                           textAlign: TextAlign.justify,
                           style: TextStyle(
                             fontSize: 18,
@@ -156,7 +141,7 @@ class _detailMeal2State extends State<detailMeal2> {
                       SizedBox(height: 10),
                       Container(
                         child: Text(
-                          "400 gram dada ayam, 4 timun Jepang, 1 bawang bombai, 4 siung bawang putih, 1 lemon dijus, 1 sendok teh saus Worcestershire, 1 sendok the kecap, 2 sdm mentega, Garam secukupnya, Merica.",
+                          "300gr zaitun hitam dikeringkan, 3 sdm caper dikeringkan, 3 Fillet ikan teri, 1 siung bawang putih, 1 sdm peterseli segar cincang, ¼ lemon dijus, 3-4 sdm minyak zaitun extra virgin, Garam, Lada.",
                           textAlign: TextAlign.justify,
                           style: TextStyle(
                             fontSize: 18,
@@ -183,7 +168,7 @@ class _detailMeal2State extends State<detailMeal2> {
                       SizedBox(height: 10),
                       Container(
                         child: Text(
-                          "1. Potong dadu ayam dan bawang bombay. Cincang bawang putih. Spiralisasikan zucchini menjadi mie.2. Panaskan mentega dalam wajan antilengket besar dengan api sedang. Tambahkan bawang bombay dan bawang putih lalu masak hingga harum.3. Tingkatkan panas hingga sedang-tinggi. Tambahkan ayam dan masak sampai semua sisi berwarna keemasan, aduk sesekali.4. Tambahkan jus lemon, kecap inggris, kecap asin, garam dan merica. Aduk hingga tercampur dan lanjutkan memasak hingga sebagian besar cairan menguap.5.  Angkat ayam dari wajan dan biarkan tetap hangat. Tambahkan zucchini spiral ke dalam wajan dan masak dengan api sedang-besar sampai empuk, bumbui dengan garam dan merica sesuai selera.6. Tambahkan ayam kembali ke wajan dan aduk semuanya hingga tercampur. ",
+                          "1.	Dalam food processor, tambahkan semua bahan kecuali minyak zaitun extra virgin. Denyut nadi sampai terbentuk pasta cincang halus. 2.	Dengan food processor yang berjalan rendah, gerimis hanya cukup minyak zaitun extra virgin untuk membentuk pasta yang dapat menyebar. 3.	Bumbui secukupnya dengan garam dan merica sesuai kebutuhan. Anda mungkin tidak membutuhkan banyak garam. 4.	Sajikan pada suhu kamar dengan roti atau biskuit.",
                           textAlign: TextAlign.justify,
                           style: TextStyle(
                             fontSize: 18,

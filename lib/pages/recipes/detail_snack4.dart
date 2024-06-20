@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class detailMeal2 extends StatefulWidget {
-  const detailMeal2({super.key});
+class detailSnack4 extends StatefulWidget {
+  const detailSnack4({super.key});
 
   @override
-  State<detailMeal2> createState() => _detailMeal2State();
+  State<detailSnack4> createState() => _detailSnack4State();
 }
 
-class _detailMeal2State extends State<detailMeal2> {
+class _detailSnack4State extends State<detailSnack4> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,21 +37,6 @@ class _detailMeal2State extends State<detailMeal2> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Center(
-                    // child: Container(
-                    //   width: 135,
-                    //   height: 135,
-                    //   decoration: BoxDecoration(
-                    //     border: Border.all(
-                    //         color: Color.fromARGB(255, 237, 237, 237),
-                    //         width: 7),
-                    //     shape: BoxShape.rectangle,
-                    //     image: DecorationImage(
-                    //       image: NetworkImage(
-                    //           "https://static.chloeting.com/recipes/6200b37d382ba4ec17393dbd/images/miso-salmon-nourish-bowl-1.webp"),
-                    //       fit: BoxFit.cover,
-                    //     ),
-                    //   ),
-                    // ),
                     child: Column(
                       children: [
                         Container(
@@ -62,7 +47,7 @@ class _detailMeal2State extends State<detailMeal2> {
                             bottom: 10,
                           ),
                           child: Image.network(
-                            "https://static.chloeting.com/recipes/62ce6c1387e357875647b592/images/lemon-garlic-chicken-zoodles-1.jpeg",
+                            "https://static.chloeting.com/recipes/6200b37d382ba4ec17393dbd/images/miso-salmon-nourish-bowl-1.webp",
                             width: 300,
                             height: 400,
                             fit: BoxFit.fill,
@@ -71,7 +56,7 @@ class _detailMeal2State extends State<detailMeal2> {
                         SizedBox(height: 10),
                         Container(
                           child: Text(
-                            "Lemon Garlic Chicken Zoodles",
+                            "Strawberry Protein Bliss Balls",
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               fontSize: 22,
@@ -102,7 +87,7 @@ class _detailMeal2State extends State<detailMeal2> {
                       SizedBox(height: 10),
                       Container(
                         child: Text(
-                          "30 menit",
+                          "10 menit",
                           textAlign: TextAlign.justify,
                           style: TextStyle(
                             fontSize: 18,
@@ -129,7 +114,7 @@ class _detailMeal2State extends State<detailMeal2> {
                       SizedBox(height: 10),
                       Container(
                         child: Text(
-                          "Ayam dilapisi saus mentega bawang putih lemon disajikan dengan mie zucchini. Makanan beraroma, rendah karbohidrat, dan tinggi protein.",
+                          "Bola kebahagiaan yang dikemas protein lezat untuk memuaskan hasrat gula Anda. Ini memiliki keseimbangan karbohidrat, protein dan lemak yang baik dari kurma Medjool, hazelnut dan stroberi untuk membantu Anda kenyang untuk waktu yang lama!",
                           textAlign: TextAlign.justify,
                           style: TextStyle(
                             fontSize: 18,
@@ -156,7 +141,7 @@ class _detailMeal2State extends State<detailMeal2> {
                       SizedBox(height: 10),
                       Container(
                         child: Text(
-                          "400 gram dada ayam, 4 timun Jepang, 1 bawang bombai, 4 siung bawang putih, 1 lemon dijus, 1 sendok teh saus Worcestershire, 1 sendok the kecap, 2 sdm mentega, Garam secukupnya, Merica.",
+                          "150gr Kurma Medjool, 80g Hazelnut, 70gr bubuk protein nabati, Stroberi, 3 sdm bubuk kakao, 1/4 sdt, garam, Stevia, Air.",
                           textAlign: TextAlign.justify,
                           style: TextStyle(
                             fontSize: 18,
@@ -183,7 +168,7 @@ class _detailMeal2State extends State<detailMeal2> {
                       SizedBox(height: 10),
                       Container(
                         child: Text(
-                          "1. Potong dadu ayam dan bawang bombay. Cincang bawang putih. Spiralisasikan zucchini menjadi mie.2. Panaskan mentega dalam wajan antilengket besar dengan api sedang. Tambahkan bawang bombay dan bawang putih lalu masak hingga harum.3. Tingkatkan panas hingga sedang-tinggi. Tambahkan ayam dan masak sampai semua sisi berwarna keemasan, aduk sesekali.4. Tambahkan jus lemon, kecap inggris, kecap asin, garam dan merica. Aduk hingga tercampur dan lanjutkan memasak hingga sebagian besar cairan menguap.5.  Angkat ayam dari wajan dan biarkan tetap hangat. Tambahkan zucchini spiral ke dalam wajan dan masak dengan api sedang-besar sampai empuk, bumbui dengan garam dan merica sesuai selera.6. Tambahkan ayam kembali ke wajan dan aduk semuanya hingga tercampur. ",
+                          "1. Rendam kurma dalam air hangat selama 5-10 menit sampai lunak tetapi tidak lembek. 2. Tambahkan kurma lunak, bubuk protein nabati, bubuk kakao, garam dan pemanis ke dalam food processor, lalu proses hingga tercampur rata. 3. Terakhir, tambahkan hazelnut Anda ke food processor dan berikan blitz cepat. Campuran ini akan menjadi lapisan bola kebahagiaan Anda. Jangan terlalu banyak memproses di sini jika Anda menginginkan crunch yang bagus untuk itu. 4. Ambil stroberi Anda dan bungkus satu per satu dalam lapisan lapisan bola kebahagiaan Anda dan selesai!",
                           textAlign: TextAlign.justify,
                           style: TextStyle(
                             fontSize: 18,
