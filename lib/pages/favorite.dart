@@ -2,6 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:activewell_new/services/favoriteVideo_service.dart';
 import 'package:activewell_new/services/favoriteRecipe_service.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
+
+const Map<String, String> recipeRoutes = {
+  'Vegan Curried Egg Sandwich': '/detail_meal1',
+  'Lemon Garlic Chicken Zoodles': '/detail_meal2',
+  'Tuna Potato Egg Salad': '/detail_meal3',
+  'Low-Sugar Honey Soy Chicken': '/detail_meal4',
+  'Sugar-Free Lemonade': '/detail_beverage1',
+  '3-Ingredient Strawberry Boba': '/detail_beverage2',
+  'Shamrock Smoothie': '/detail_beverage3',
+  'Pink Dragon Fruit Smoothie': '/detail_beverage4',
+  'Pizza Zucchini Bites': '/detail_snack1',
+  'Black Olive Tapenade': '/detail_snack2',
+  'High Protein Creamy Garlic Chive Dip': '/detail_snack3',
+  'Strawberry Protein Bliss Balls': '/detail_snack4',
+};
 
 class FavoritePage extends ConsumerStatefulWidget {
   const FavoritePage({super.key});
@@ -76,71 +93,82 @@ class _FavoritePageState extends ConsumerState<FavoritePage>
                   itemCount: favoriteVideos.length,
                   itemBuilder: (context, index) {
                     final video = favoriteVideos[index];
-                    return Container(
-                      height: MediaQuery.of(context).size.height * 0.125,
-                      width: MediaQuery.of(context).size.width * 0.8,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.white,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.1),
-                            spreadRadius: 1,
-                            blurRadius: 1,
-                            offset: Offset(0, 1),
-                          )
-                        ],
-                      ),
-                      padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-                      margin:
-                          EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Flexible(
-                            flex: 2,
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(8.0),
-                              child: AspectRatio(
-                                aspectRatio: 16 / 9,
-                                child: Image.network(
-                                  video.thumbnailUrl,
-                                  fit: BoxFit.contain,
+                    return GestureDetector(
+                      onTap: () async {
+                        print("lanch youtube video ...");
+                        final url = Uri.parse(video.videoUrl);
+                        if (await canLaunchUrl(url)) {
+                          await launchUrl(url);
+                        } else {
+                          throw 'Could not launch $url';
+                        }
+                      },
+                      child: Container(
+                        height: MediaQuery.of(context).size.height * 0.125,
+                        width: MediaQuery.of(context).size.width * 0.8,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: Colors.white,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.1),
+                              spreadRadius: 1,
+                              blurRadius: 1,
+                              offset: Offset(0, 1),
+                            )
+                          ],
+                        ),
+                        padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+                        margin:
+                            EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Flexible(
+                              flex: 2,
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(8.0),
+                                child: AspectRatio(
+                                  aspectRatio: 16 / 9,
+                                  child: Image.network(
+                                    video.thumbnailUrl,
+                                    fit: BoxFit.contain,
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                          SizedBox(width: 10),
-                          Expanded(
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                SizedBox(
-                                  child: Text(
-                                    video.title,
-                                    style: TextStyle(fontSize: 14),
+                            SizedBox(width: 10),
+                            Expanded(
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  SizedBox(
+                                    child: Text(
+                                      video.title,
+                                      style: TextStyle(fontSize: 14),
+                                    ),
+                                    width: 80,
                                   ),
-                                  width: 80,
-                                ),
-                                Expanded(
-                                  child: IconButton(
-                                    icon: Icon(Icons.delete),
-                                    onPressed: () async {
-                                      final favoriteVideoProviderNotifier =
-                                          ref.read(videoProvider.notifier);
-                                      await favoriteVideoProviderNotifier
-                                          .deleteFavoriteVideos(
-                                              context, video.title);
-                                      // Handle save button onPressed event
-                                    },
+                                  Expanded(
+                                    child: IconButton(
+                                      icon: Icon(Icons.delete),
+                                      onPressed: () async {
+                                        final favoriteVideoProviderNotifier =
+                                            ref.read(videoProvider.notifier);
+                                        await favoriteVideoProviderNotifier
+                                            .deleteFavoriteVideos(
+                                                context, video.title);
+                                        // Handle save button onPressed event
+                                      },
+                                    ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     );
                   },
@@ -149,71 +177,77 @@ class _FavoritePageState extends ConsumerState<FavoritePage>
                   itemCount: favoriteRecipes.length,
                   itemBuilder: (context, index) {
                     final recipe = favoriteRecipes[index];
-                    return Container(
-                      height: MediaQuery.of(context).size.height * 0.125,
-                      width: MediaQuery.of(context).size.width * 0.8,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.white,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.1),
-                            spreadRadius: 1,
-                            blurRadius: 1,
-                            offset: Offset(0, 1),
-                          )
-                        ],
-                      ),
-                      padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-                      margin:
-                          EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Flexible(
-                            flex: 2,
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(8.0),
-                              child: AspectRatio(
-                                aspectRatio: 16 / 9,
-                                child: Image.network(
-                                  recipe.imgUrl,
-                                  fit: BoxFit.cover,
+                    return GestureDetector(
+                      onTap: () {
+                        final routeName = recipeRoutes[recipe.title] ?? '/';
+                        Navigator.of(context).pushNamed(routeName);
+                      },
+                      child: Container(
+                        height: MediaQuery.of(context).size.height * 0.125,
+                        width: MediaQuery.of(context).size.width * 0.8,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: Colors.white,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.1),
+                              spreadRadius: 1,
+                              blurRadius: 1,
+                              offset: Offset(0, 1),
+                            )
+                          ],
+                        ),
+                        padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+                        margin:
+                            EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Flexible(
+                              flex: 2,
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(8.0),
+                                child: AspectRatio(
+                                  aspectRatio: 16 / 9,
+                                  child: Image.network(
+                                    recipe.imgUrl,
+                                    fit: BoxFit.cover,
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                          SizedBox(width: 10),
-                          Expanded(
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                SizedBox(
-                                  child: Text(
-                                    recipe.title,
-                                    style: TextStyle(fontSize: 14),
+                            SizedBox(width: 10),
+                            Expanded(
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  SizedBox(
+                                    child: Text(
+                                      recipe.title,
+                                      style: TextStyle(fontSize: 14),
+                                    ),
+                                    width: 80,
                                   ),
-                                  width: 80,
-                                ),
-                                Expanded(
-                                  child: IconButton(
-                                    icon: Icon(Icons.delete),
-                                    onPressed: () async {
-                                      final favoriteRecipeProviderNotifier =
-                                          ref.read(recipeProvider.notifier);
-                                      await favoriteRecipeProviderNotifier
-                                          .deleteFavoriteRecipes(
-                                              context, recipe.title);
-                                      // Handle save button onPressed event
-                                    },
+                                  Expanded(
+                                    child: IconButton(
+                                      icon: Icon(Icons.delete),
+                                      onPressed: () async {
+                                        final favoriteRecipeProviderNotifier =
+                                            ref.read(recipeProvider.notifier);
+                                        await favoriteRecipeProviderNotifier
+                                            .deleteFavoriteRecipes(
+                                                context, recipe.title);
+                                        // Handle save button onPressed event
+                                      },
+                                    ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     );
                   },
