@@ -229,6 +229,7 @@ class _VideosPageState extends ConsumerState<VideosPage>
                   itemBuilder: (context, index) {
                     return GestureDetector(
                       onTap: () async {
+                        print("launch youtube app");
                         await launchUrl(tenMinVideoList[index].url);
                       },
                       child: Container(
@@ -311,6 +312,7 @@ class _VideosPageState extends ConsumerState<VideosPage>
                   itemBuilder: (context, index) {
                     return GestureDetector(
                       onTap: () async {
+                        print("launch youtube app");
                         await launchUrl(twentyMinVideoList[index].url);
                       },
                       child: Container(
@@ -393,6 +395,7 @@ class _VideosPageState extends ConsumerState<VideosPage>
                   itemBuilder: (context, index) {
                     return GestureDetector(
                       onTap: () async {
+                        print("launch youtube app");
                         await launchUrl(standingVideoList[index].url);
                       },
                       child: Container(
