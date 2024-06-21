@@ -71,7 +71,7 @@ class MyApp extends StatelessWidget {
           '/detail_snack3': (context) => detailSnack3(),
           '/detail_snack4': (context) => detailSnack4(),
         },
-        initialRoute: "/welcome",
+        initialRoute: "/splash",
       ),
     );
   }
