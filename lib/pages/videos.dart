@@ -19,37 +19,37 @@ List<TenMinVideos> tenMinVideoList = [
     title: "10 Min Intense Abs",
     image:
         "https://static.chloeting.com/videos/663517d500c230367fe429e6/ed1cabb0-0c79-11ef-854a-c15ecb281560.jpeg",
-    url: Uri.parse('https://youtu.be/lHCZY6ZN2aI?si=wMP42J3oQWi2pBR6'),
+    url: Uri.parse('https://youtu.be/aeVsOW1LKyQ'),
   ),
   TenMinVideos(
     title: "10 Min Daily Abs",
     image:
         "https://static.chloeting.com/videos/6584905afaede632c94fe126/23b147a0-a92c-11ee-9277-3b937f16846b.jpeg",
-    url: Uri.parse('https://youtu.be/aeVsOW1LKyQ?si=lnHRqXBaCuZj77o6'),
+    url: Uri.parse('https://youtu.be/DUvXoAwR-8k'),
   ),
   TenMinVideos(
     title: "Toned Arms",
     image:
         "https://static.chloeting.com/videos/65849175be23b57ce10a677b/6abe4220-aea3-11ee-8b18-8b55a7ba3b1c.jpeg",
-    url: Uri.parse('https://youtu.be/oZkq0BZpDXY?si=QTrsWxyBYKGxFiOl'),
+    url: Uri.parse('https://youtu.be/LE6RidrBMdM'),
   ),
   TenMinVideos(
     title: "Standing Abs",
     image:
         "https://static.chloeting.com/videos/65d02d0887b4dd6dfaacfd5a/9b987f00-cfa5-11ee-9701-cfed4f69f9be.jpeg",
-    url: Uri.parse('https://youtu.be/DUvXoAwR-8k?si=Zr6N4_DghOUT-J2t'),
+    url: Uri.parse('https://youtu.be/oZkq0BZpDXY'),
   ),
   TenMinVideos(
     title: "10 Min HIIT",
     image:
         "https://static.chloeting.com/videos/63ae0fd749cf64962cb573f5/18930070-959b-11ed-9436-59d29cd71f8d.jpeg",
-    url: Uri.parse('https://youtu.be/bYlWxYP6b9s?si=IM6njAzHzjyhPJ8h'),
+    url: Uri.parse('https://youtu.be/bYlWxYP6b9s'),
   ),
   TenMinVideos(
     title: "Core & Arms",
     image:
         "https://static.chloeting.com/videos/62c4a9cfb88c73c70d9d55d4/84970330-fca7-11ec-a798-935d9eee8a63.jpeg",
-    url: Uri.parse('https://youtu.be/bYlWxYP6b9s?si=IM6njAzHzjyhPJ8h'),
+    url: Uri.parse('https://youtu.be/k8-Voj9GfDw'),
   ),
 ];
 
@@ -67,38 +67,38 @@ List<TwentyMinVideos> twentyMinVideoList = [
   TwentyMinVideos(
     title: "Full Body Flat Tummy",
     image:
-        "https://static.chloeting.com/videos/61bbef772d47479a9df2358d/3ef80df0-5edd-11ec-b182-df31ae6aab45.jpeg",
-    url: Uri.parse('https://youtu.be/lHCZY6ZN2aI?si=wMP42J3oQWi2pBR6'),
+        "https://static.chloeting.com/videos/61bbef772d47479a9df2358d/00a25fa0-2dd5-11ef-8a2f-57a8e8858c98.jpeg",
+    url: Uri.parse('https://youtu.be/CGmr02bfHUo'),
   ),
   TwentyMinVideos(
     title: "Do This and Get Fit",
     image:
         "https://static.chloeting.com/videos/61bbfe1c2cb3b78eb6ac2c23/f989c480-5ee5-11ec-9a04-3fd984621d67.jpeg",
-    url: Uri.parse('https://youtu.be/aeVsOW1LKyQ?si=lnHRqXBaCuZj77o6'),
+    url: Uri.parse('https://youtu.be/ixKRye1PqXU'),
   ),
   TwentyMinVideos(
     title: "Complete Full Body Workout",
     image:
-        "https://static.chloeting.com/videos/61bbb9f2017bbb985e15f8b6/58abd990-5ebd-11ec-b182-df31ae6aab45.jpeg",
-    url: Uri.parse('https://youtu.be/oZkq0BZpDXY?si=QTrsWxyBYKGxFiOl'),
+        "https://static.chloeting.com/videos/61bbb9f2017bbb985e15f8b6/24cf9610-22d4-11ef-981d-4940af0f8fe6.jpeg",
+    url: Uri.parse('https://youtu.be/LeOHID-EDA0'),
   ),
   TwentyMinVideos(
     title: "Weight Loss Full Body HIIT",
     image:
         "https://static.chloeting.com/videos/61bc29dc37778b5b830c6803/0d48b430-5f00-11ec-9fce-4781ba46fa9b.jpeg",
-    url: Uri.parse('https://youtu.be/DUvXoAwR-8k?si=Zr6N4_DghOUT-J2t'),
+    url: Uri.parse('https://youtu.be/uvNsr4Fy-DU'),
   ),
   TwentyMinVideos(
     title: "Full Body No Jumping",
     image:
         "https://static.chloeting.com/videos/61ce510934185a9a5617671e/fc539460-69d1-11ec-88d2-07e5364d275e.jpeg",
-    url: Uri.parse('https://youtu.be/bYlWxYP6b9s?si=IM6njAzHzjyhPJ8h'),
+    url: Uri.parse('https://youtu.be/gvV65CCDMvg'),
   ),
   TwentyMinVideos(
     title: "Cardio Abs",
     image:
-        "https://static.chloeting.com/videos/61bbd46652c5c9bf0f25508e/1cc34a70-5ecd-11ec-9a04-3fd984621d67.jpeg",
-    url: Uri.parse('https://youtu.be/bYlWxYP6b9s?si=IM6njAzHzjyhPJ8h'),
+        "https://static.chloeting.com/videos/63ae0f463e8cb6226b08a251/35fd68f0-8a9a-11ed-8ba9-1dd291b341e8.jpeg",
+    url: Uri.parse('https://youtu.be/kFqVB3v9Jk0'),
   ),
 ];
 
@@ -116,38 +116,38 @@ List<StandingVideos> standingVideoList = [
   StandingVideos(
     title: "Lean Arms Workout",
     image:
-        "https://static.chloeting.com/videos/61bbdeaac3d293024898b867/3b4068b0-5ed3-11ec-b99f-c33e6b9468db.jpeg",
-    url: Uri.parse('https://youtu.be/lHCZY6ZN2aI?si=wMP42J3oQWi2pBR6'),
+        "https://static.chloeting.com/videos/61bbdeaac3d293024898b867/00b789d0-2aaa-11ef-ba9e-f5dd36a3fc38.jpeg",
+    url: Uri.parse('https://youtu.be/j64BBgBGNIU'),
   ),
   StandingVideos(
     title: "Standing Abs",
     image:
-        "https://static.chloeting.com/videos/61bbf2732cb3b78eb6ac2bf4/0666a170-5edf-11ec-b8cd-2976cd667d03.jpeg",
-    url: Uri.parse('https://youtu.be/aeVsOW1LKyQ?si=lnHRqXBaCuZj77o6'),
+        "https://static.chloeting.com/videos/61bbf2732cb3b78eb6ac2bf4/3c373530-2de0-11ef-9b06-c7b6b0618b61.jpeg",
+    url: Uri.parse('https://youtu.be/V4sWpLJcQoU'),
   ),
   StandingVideos(
     title: "Fat Burn",
     image:
-        "https://static.chloeting.com/videos/61bbf2bd2d47479a9df235a2/327be0e0-5edf-11ec-883e-77d525cedf9b.jpeg",
-    url: Uri.parse('https://youtu.be/oZkq0BZpDXY?si=QTrsWxyBYKGxFiOl'),
+        "https://static.chloeting.com/videos/61bbf2bd2d47479a9df235a2/4c9ce690-2de0-11ef-ba9e-f5dd36a3fc38.jpeg",
+    url: Uri.parse('https://youtu.be/StN0-7XLuR4'),
   ),
   StandingVideos(
     title: "Calorie Burning HIIT",
     image:
         "https://static.chloeting.com/videos/61bc1df44df7b918c30e8bb3/f49be300-5ef8-11ec-b4e8-6545cdfc138f.jpeg",
-    url: Uri.parse('https://youtu.be/DUvXoAwR-8k?si=Zr6N4_DghOUT-J2t'),
+    url: Uri.parse('https://youtu.be/xlIKZKO8wao'),
   ),
   StandingVideos(
     title: "Full Body Workout - No Planks",
     image:
         "https://static.chloeting.com/videos/6289a4cfaff22d3c952a8b2d/da43cf30-d979-11ec-8387-814d61d6974c.jpeg",
-    url: Uri.parse('https://youtu.be/bYlWxYP6b9s?si=IM6njAzHzjyhPJ8h'),
+    url: Uri.parse('https://youtu.be/lX9XDNhxf54'),
   ),
   StandingVideos(
     title: "Weight Loss HIIT",
     image:
         "https://static.chloeting.com/videos/61ce4f20173d57799999a755/d8793960-69d0-11ec-88d2-07e5364d275e.jpeg",
-    url: Uri.parse('https://youtu.be/bYlWxYP6b9s?si=IM6njAzHzjyhPJ8h'),
+    url: Uri.parse('https://youtu.be/T8o6ti9tbFA'),
   ),
 ];
 
